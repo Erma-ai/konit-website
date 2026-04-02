@@ -7,588 +7,264 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='58' r='35' fill='%23000'/><ellipse cx='50' cy='62' rx='12' ry='18' fill='%23E5A100' transform='rotate(-15 50 62)'/><polygon points='42,18 55,28 38,28' fill='%23000'/></svg>">
 </head>
 <body>
 
-    <!-- ============ PAGE: HOME ============ -->
-    <div class="page active" id="page-home">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48">
-                        <circle cx="25" cy="35" r="20" fill="#1a1a1a"/>
-                        <ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/>
-                        <polygon points="20,10 30,18 18,18" fill="#1a1a1a"/>
-                    </svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
-                </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu">
-                    <span></span><span></span><span></span>
-                </button>
+    <!-- ===== SINGLE STICKY NAVBAR ===== -->
+    <nav class="navbar" id="main-nav">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <img src="logo.svg" alt="KONIT" class="logo-img">
+            </a>
+            <div class="nav-links" id="nav-links">
+                <a href="#city-pulse" class="nav-link">CITY PULSE</a>
+                <a href="#urban-relics" class="nav-link">URBAN RELICS</a>
+                <a href="#drop-a-spot" class="nav-link">DROP A SPOT</a>
+                <a href="#memory-box" class="nav-link">MEMORY BOX</a>
+                <a href="#join-the-vibe" class="nav-link">JOIN THE VIBE</a>
             </div>
-            <div class="nav-divider"></div>
-        </nav>
+            <button class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="nav-divider"></div>
+    </nav>
 
-        <div class="page-content hero-page">
-            <div class="hero-center">
-                <p class="hero-quote">&ldquo;Tirana, nje harte eksperiencash.&rdquo;</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-page" onclick="showPage('hot-spots')">HOT SPOTS</button>
-                    <button class="btn btn-page" onclick="showPage('pulse')">PULSE</button>
-                </div>
-            </div>
-            <!-- Illustrated character bottom-left -->
-            <div class="hero-character-wrap">
-                <svg viewBox="0 0 500 400" class="hero-char">
-                    <!-- Long stretchy cat body -->
-                    <path d="M-20,320 Q60,200 180,250 Q300,300 380,220 Q420,190 440,200" fill="#E5A100" stroke="#D4960A" stroke-width="2"/>
-                    <ellipse cx="100" cy="300" rx="100" ry="60" fill="#E5A100"/>
-                    <!-- Spots on body -->
-                    <circle cx="60" cy="285" r="8" fill="#D4960A" opacity="0.5"/>
-                    <circle cx="130" cy="310" r="6" fill="#D4960A" opacity="0.5"/>
-                    <circle cx="180" cy="275" r="5" fill="#D4960A" opacity="0.5"/>
-                    <!-- Head -->
-                    <circle cx="420" cy="190" r="45" fill="#E5A100"/>
-                    <!-- Ears -->
-                    <polygon points="395,155 405,120 415,155" fill="#E5A100" stroke="#D4960A" stroke-width="1.5"/>
-                    <polygon points="430,150 445,118 448,152" fill="#E5A100" stroke="#D4960A" stroke-width="1.5"/>
-                    <polygon points="400,155 407,130 412,155" fill="#E8524A" opacity="0.7"/>
-                    <polygon points="434,152 441,126 444,152" fill="#E8524A" opacity="0.7"/>
-                    <!-- Eyes -->
-                    <circle cx="408" cy="185" r="7" fill="#fff"/>
-                    <circle cx="435" cy="183" r="7" fill="#fff"/>
-                    <circle cx="409" cy="186" r="3.5" fill="#1a1a1a"/>
-                    <circle cx="436" cy="184" r="3.5" fill="#1a1a1a"/>
-                    <!-- Nose -->
-                    <ellipse cx="422" cy="196" rx="4" ry="3" fill="#E8524A"/>
-                    <!-- Mouth -->
-                    <path d="M416,202 Q422,210 428,202" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-                    <!-- Hand/paw pointing up with location pin -->
-                    <path d="M440,200 Q470,170 460,140" fill="none" stroke="#E5A100" stroke-width="18" stroke-linecap="round"/>
-                    <circle cx="458" cy="130" r="12" fill="#E8524A"/>
-                    <polygon points="452,138 458,158 464,138" fill="#E8524A"/>
-                    <circle cx="458" cy="128" r="4" fill="#fff"/>
-                    <!-- Tail -->
-                    <path d="M-10,290 Q-40,220 10,180 Q40,160 30,200" fill="none" stroke="#E5A100" stroke-width="20" stroke-linecap="round"/>
-                    <!-- Feet -->
-                    <ellipse cx="50" cy="355" rx="22" ry="10" fill="#D4960A"/>
-                    <ellipse cx="100" cy="360" rx="22" ry="10" fill="#D4960A"/>
-                    <ellipse cx="150" cy="358" rx="22" ry="10" fill="#D4960A"/>
-                </svg>
+    <!-- ===== SECTION: HOME ===== -->
+    <section id="home" class="section section-hero">
+        <div class="hero-center">
+            <p class="hero-quote">&ldquo;Tirana, nje harte eksperiencash.&rdquo;</p>
+            <div class="hero-buttons">
+                <button class="btn btn-page" onclick="scrollToSection('city-pulse')">CITY PULSE</button>
+                <button class="btn btn-page" onclick="scrollToSection('urban-relics')">URBAN RELICS</button>
+                <button class="btn btn-page" onclick="scrollToSection('drop-a-spot')">DROP A SPOT</button>
+                <button class="btn btn-page" onclick="scrollToSection('memory-box')">MEMORY BOX</button>
+                <button class="btn btn-page" onclick="scrollToSection('join-the-vibe')">JOIN THE VIBE</button>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ============ PAGE: HOT SPOTS ============ -->
-    <div class="page" id="page-hot-spots">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link active" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
-                </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <!-- ===== SECTION: CITY PULSE ===== -->
+    <section id="city-pulse" class="section">
+        <div class="section-content">
+            <h2 class="page-title">CITY PULSE</h2>
+            <div class="tab-bar">
+                <button class="tab-btn active" onclick="switchTab('hot-spots-tab', this)">HOT SPOTS</button>
+                <button class="tab-btn" onclick="switchTab('pulse-tab', this)">PULSE</button>
             </div>
-            <div class="nav-divider"></div>
-        </nav>
-
-        <div class="page-content">
-            <h2 class="page-title">HOT SPOTS</h2>
-            <div class="card-row four-col">
-                <div class="spot-card" onclick="showPage('city-pulse')">
-                    <div class="spot-image">
-                        <svg viewBox="0 0 200 260" class="landscape-svg">
-                            <rect width="200" height="260" fill="#C5E3F6"/>
-                            <ellipse cx="120" cy="90" rx="50" ry="30" fill="#fff" opacity="0.9"/>
-                            <ellipse cx="100" cy="95" rx="35" ry="22" fill="#fff"/>
-                            <path d="M0,180 Q50,140 100,170 Q150,130 200,160 L200,260 L0,260 Z" fill="#8DB84A"/>
-                            <path d="M0,200 Q60,170 120,190 Q170,160 200,180 L200,260 L0,260 Z" fill="#6B943A"/>
-                        </svg>
+            <div id="hot-spots-tab" class="tab-content active">
+                <div class="card-row four-col">
+                    <div class="spot-card">
+                        <div class="spot-image placeholder-img"></div>
+                        <span class="spot-label">BARS</span>
                     </div>
-                    <span class="spot-label">BARS</span>
+                    <div class="spot-card">
+                        <div class="spot-image placeholder-img"></div>
+                        <span class="spot-label">ART GALLERIES</span>
+                    </div>
+                    <div class="spot-card">
+                        <div class="spot-image placeholder-img"></div>
+                        <span class="spot-label">CULTURAL SPACES</span>
+                    </div>
+                    <div class="spot-card">
+                        <div class="spot-image placeholder-img"></div>
+                        <span class="spot-label">CLUBS</span>
+                    </div>
                 </div>
-                <div class="spot-card" onclick="showPage('city-pulse')">
-                    <div class="spot-image">
-                        <svg viewBox="0 0 200 260" class="landscape-svg">
-                            <rect width="200" height="260" fill="#C5E3F6"/>
-                            <ellipse cx="110" cy="80" rx="45" ry="28" fill="#fff" opacity="0.9"/>
-                            <ellipse cx="90" cy="85" rx="30" ry="20" fill="#fff"/>
-                            <path d="M0,175 Q40,145 90,165 Q140,135 200,155 L200,260 L0,260 Z" fill="#8DB84A"/>
-                            <path d="M0,195 Q55,165 110,185 Q160,155 200,175 L200,260 L0,260 Z" fill="#6B943A"/>
-                        </svg>
+            </div>
+            <div id="pulse-tab" class="tab-content">
+                <div class="card-row five-col">
+                    <div class="spot-card">
+                        <div class="spot-image placeholder-img"></div>
+                        <span class="spot-label">MUSIC</span>
                     </div>
-                    <span class="spot-label">ART GALLERIES</span>
-                </div>
-                <div class="spot-card" onclick="showPage('city-pulse')">
-                    <div class="spot-image">
-                        <svg viewBox="0 0 200 260" class="landscape-svg">
-                            <rect width="200" height="260" fill="#C5E3F6"/>
-                            <ellipse cx="130" cy="85" rx="48" ry="30" fill="#fff" opacity="0.9"/>
-                            <ellipse cx="105" cy="90" rx="32" ry="22" fill="#fff"/>
-                            <path d="M0,170 Q45,140 95,160 Q145,130 200,150 L200,260 L0,260 Z" fill="#8DB84A"/>
-                            <path d="M0,190 Q60,160 115,180 Q165,150 200,170 L200,260 L0,260 Z" fill="#6B943A"/>
-                        </svg>
+                    <div class="spot-card">
+                        <div class="spot-image placeholder-img"></div>
+                        <span class="spot-label">ART</span>
                     </div>
-                    <span class="spot-label">CULTURAL SPACES</span>
-                </div>
-                <div class="spot-card" onclick="showPage('city-pulse')">
-                    <div class="spot-image">
-                        <svg viewBox="0 0 200 260" class="landscape-svg">
-                            <rect width="200" height="260" fill="#C5E3F6"/>
-                            <ellipse cx="100" cy="85" rx="42" ry="26" fill="#fff" opacity="0.9"/>
-                            <ellipse cx="80" cy="88" rx="28" ry="18" fill="#fff"/>
-                            <path d="M0,178 Q50,148 100,168 Q150,138 200,158 L200,260 L0,260 Z" fill="#8DB84A"/>
-                            <path d="M0,198 Q58,168 118,188 Q168,158 200,178 L200,260 L0,260 Z" fill="#6B943A"/>
-                        </svg>
+                    <div class="spot-card">
+                        <div class="spot-image placeholder-img"></div>
+                        <span class="spot-label">SPORT</span>
                     </div>
-                    <span class="spot-label">CLUBS</span>
+                    <div class="spot-card">
+                        <div class="spot-image placeholder-img"></div>
+                        <span class="spot-label">CULINARY</span>
+                    </div>
+                    <div class="spot-card">
+                        <div class="spot-image placeholder-img"></div>
+                        <span class="spot-label">HIDDEN GEMS</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ============ PAGE: PULSE ============ -->
-    <div class="page" id="page-pulse">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link active" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
+    <!-- ===== SECTION: URBAN RELICS ===== -->
+    <section id="urban-relics" class="section">
+        <div class="section-content">
+            <h2 class="page-title">URBAN RELICS</h2>
+            <div class="urban-relics-layout">
+                <div class="urban-relics-sidebar">
+                    <button class="tab-btn-side active" onclick="switchUrbanTab('fits-tab', this)">FITS</button>
+                    <button class="tab-btn-side" onclick="switchUrbanTab('urban-gear-tab', this)">URBAN GEAR</button>
+                    <button class="tab-btn-side" onclick="switchUrbanTab('creative-tools-tab', this)">CREATIVE TOOLS</button>
                 </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
-            <div class="nav-divider"></div>
-        </nav>
-
-        <div class="page-content">
-            <h2 class="page-title">PULSE</h2>
-            <div class="card-row five-col">
-                <div class="spot-card">
-                    <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="120" cy="90" rx="50" ry="30" fill="#fff" opacity="0.9"/><ellipse cx="100" cy="95" rx="35" ry="22" fill="#fff"/><path d="M0,180 Q50,140 100,170 Q150,130 200,160 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,200 Q60,170 120,190 Q170,160 200,180 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                    <span class="spot-label">MUSIC</span>
-                </div>
-                <div class="spot-card">
-                    <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="110" cy="80" rx="45" ry="28" fill="#fff" opacity="0.9"/><ellipse cx="90" cy="85" rx="30" ry="20" fill="#fff"/><path d="M0,175 Q40,145 90,165 Q140,135 200,155 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,195 Q55,165 110,185 Q160,155 200,175 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                    <span class="spot-label">ART</span>
-                </div>
-                <div class="spot-card">
-                    <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="130" cy="85" rx="48" ry="30" fill="#fff" opacity="0.9"/><ellipse cx="105" cy="90" rx="32" ry="22" fill="#fff"/><path d="M0,170 Q45,140 95,160 Q145,130 200,150 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,190 Q60,160 115,180 Q165,150 200,170 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                    <span class="spot-label">SPORT</span>
-                </div>
-                <div class="spot-card">
-                    <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="100" cy="85" rx="42" ry="26" fill="#fff" opacity="0.9"/><ellipse cx="80" cy="88" rx="28" ry="18" fill="#fff"/><path d="M0,178 Q50,148 100,168 Q150,138 200,158 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,198 Q58,168 118,188 Q168,158 200,178 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                    <span class="spot-label">CULINARY</span>
-                </div>
-                <div class="spot-card">
-                    <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="115" cy="82" rx="46" ry="28" fill="#fff" opacity="0.9"/><ellipse cx="95" cy="87" rx="32" ry="20" fill="#fff"/><path d="M0,172 Q48,142 96,162 Q148,132 200,152 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,192 Q58,162 116,182 Q166,152 200,172 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                    <span class="spot-label">HIDDEN GEMS</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ PAGE: CITY PULSE (hub for Hot Spots / Pulse) ============ -->
-    <div class="page" id="page-city-pulse">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link active" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
-                </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
-            <div class="nav-divider"></div>
-        </nav>
-        <div class="page-content hero-page">
-            <div class="hero-center">
-                <p class="hero-quote">&ldquo;Tirana, nje harte eksperiencash.&rdquo;</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-page" onclick="showPage('hot-spots')">HOT SPOTS</button>
-                    <button class="btn btn-page" onclick="showPage('pulse')">PULSE</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ PAGE: URBAN RELICS - FITS ============ -->
-    <div class="page" id="page-urban-relics">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link active" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
-                </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
-            <div class="nav-divider"></div>
-        </nav>
-
-        <div class="page-content">
-            <div class="relics-layout">
-                <div class="relics-sidebar">
-                    <button class="relics-tab active" onclick="showPage('urban-relics')">FITS</button>
-                    <button class="relics-tab" onclick="showPage('urban-gear')">URBAN GEAR</button>
-                    <button class="relics-tab" onclick="showPage('creative-tools')">CREATIVE TOOLS</button>
-                </div>
-                <div class="relics-content">
-                    <div class="card-row four-col">
-                        <div class="spot-card">
-                            <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="120" cy="90" rx="50" ry="30" fill="#fff" opacity="0.9"/><ellipse cx="100" cy="95" rx="35" ry="22" fill="#fff"/><path d="M0,180 Q50,140 100,170 Q150,130 200,160 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,200 Q60,170 120,190 Q170,160 200,180 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                            <span class="spot-label">T-SHIRTS</span>
+                <div class="urban-relics-content">
+                    <div id="fits-tab" class="tab-content active">
+                        <div class="card-row four-col">
+                            <div class="spot-card">
+                                <div class="spot-image placeholder-img"></div>
+                                <span class="spot-label">T-SHIRTS</span>
+                            </div>
+                            <div class="spot-card">
+                                <div class="spot-image placeholder-img"></div>
+                                <span class="spot-label">TOTES</span>
+                            </div>
+                            <div class="spot-card">
+                                <div class="spot-image placeholder-img"></div>
+                                <span class="spot-label">SOCKS</span>
+                            </div>
+                            <div class="spot-card">
+                                <div class="spot-image placeholder-img"></div>
+                                <span class="spot-label">HATS</span>
+                            </div>
                         </div>
-                        <div class="spot-card">
-                            <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="110" cy="80" rx="45" ry="28" fill="#fff" opacity="0.9"/><ellipse cx="90" cy="85" rx="30" ry="20" fill="#fff"/><path d="M0,175 Q40,145 90,165 Q140,135 200,155 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,195 Q55,165 110,185 Q160,155 200,175 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                            <span class="spot-label">TOTES</span>
+                    </div>
+                    <div id="urban-gear-tab" class="tab-content">
+                        <div class="card-row three-col">
+                            <div class="spot-card">
+                                <div class="spot-image placeholder-img"></div>
+                                <span class="spot-label">STICKERS</span>
+                            </div>
+                            <div class="spot-card">
+                                <div class="spot-image placeholder-img"></div>
+                                <span class="spot-label">PHONE CASES</span>
+                            </div>
+                            <div class="spot-card">
+                                <div class="spot-image placeholder-img"></div>
+                                <span class="spot-label">KEYCHAINS</span>
+                            </div>
                         </div>
-                        <div class="spot-card">
-                            <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="130" cy="85" rx="48" ry="30" fill="#fff" opacity="0.9"/><ellipse cx="105" cy="90" rx="32" ry="22" fill="#fff"/><path d="M0,170 Q45,140 95,160 Q145,130 200,150 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,190 Q60,160 115,180 Q165,150 200,170 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                            <span class="spot-label">SOCKS</span>
-                        </div>
-                        <div class="spot-card">
-                            <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="100" cy="85" rx="42" ry="26" fill="#fff" opacity="0.9"/><ellipse cx="80" cy="88" rx="28" ry="18" fill="#fff"/><path d="M0,178 Q50,148 100,168 Q150,138 200,158 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,198 Q58,168 118,188 Q168,158 200,178 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                            <span class="spot-label">HATS</span>
+                    </div>
+                    <div id="creative-tools-tab" class="tab-content">
+                        <div class="card-row two-col">
+                            <div class="spot-card">
+                                <div class="spot-image placeholder-img"></div>
+                                <span class="spot-label">NOTEBOOKS</span>
+                            </div>
+                            <div class="spot-card">
+                                <div class="spot-image placeholder-img"></div>
+                                <span class="spot-label">PENCIL CASES</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ============ PAGE: URBAN GEAR ============ -->
-    <div class="page" id="page-urban-gear">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link active" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
-                </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
-            <div class="nav-divider"></div>
-        </nav>
-
-        <div class="page-content">
-            <div class="relics-layout">
-                <div class="relics-sidebar">
-                    <button class="relics-tab" onclick="showPage('urban-relics')">FITS</button>
-                    <button class="relics-tab active" onclick="showPage('urban-gear')">URBAN GEAR</button>
-                    <button class="relics-tab" onclick="showPage('creative-tools')">CREATIVE TOOLS</button>
-                </div>
-                <div class="relics-content">
-                    <div class="card-row three-col">
-                        <div class="spot-card">
-                            <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="120" cy="90" rx="50" ry="30" fill="#fff" opacity="0.9"/><ellipse cx="100" cy="95" rx="35" ry="22" fill="#fff"/><path d="M0,180 Q50,140 100,170 Q150,130 200,160 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,200 Q60,170 120,190 Q170,160 200,180 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                            <span class="spot-label">STICKERS</span>
-                        </div>
-                        <div class="spot-card">
-                            <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="110" cy="80" rx="45" ry="28" fill="#fff" opacity="0.9"/><ellipse cx="90" cy="85" rx="30" ry="20" fill="#fff"/><path d="M0,175 Q40,145 90,165 Q140,135 200,155 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,195 Q55,165 110,185 Q160,155 200,175 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                            <span class="spot-label">PHONE CASES</span>
-                        </div>
-                        <div class="spot-card">
-                            <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="130" cy="85" rx="48" ry="30" fill="#fff" opacity="0.9"/><ellipse cx="105" cy="90" rx="32" ry="22" fill="#fff"/><path d="M0,170 Q45,140 95,160 Q145,130 200,150 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,190 Q60,160 115,180 Q165,150 200,170 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                            <span class="spot-label">KEYCHAINS</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ PAGE: CREATIVE TOOLS ============ -->
-    <div class="page" id="page-creative-tools">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link active" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
-                </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
-            <div class="nav-divider"></div>
-        </nav>
-
-        <div class="page-content">
-            <div class="relics-layout">
-                <div class="relics-sidebar">
-                    <button class="relics-tab" onclick="showPage('urban-relics')">FITS</button>
-                    <button class="relics-tab" onclick="showPage('urban-gear')">URBAN GEAR</button>
-                    <button class="relics-tab active" onclick="showPage('creative-tools')">CREATIVE TOOLS</button>
-                </div>
-                <div class="relics-content">
-                    <div class="card-row two-col">
-                        <div class="spot-card">
-                            <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="120" cy="90" rx="50" ry="30" fill="#fff" opacity="0.9"/><ellipse cx="100" cy="95" rx="35" ry="22" fill="#fff"/><path d="M0,180 Q50,140 100,170 Q150,130 200,160 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,200 Q60,170 120,190 Q170,160 200,180 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                            <span class="spot-label">NOTEBOOKS</span>
-                        </div>
-                        <div class="spot-card">
-                            <div class="spot-image"><svg viewBox="0 0 200 260" class="landscape-svg"><rect width="200" height="260" fill="#C5E3F6"/><ellipse cx="110" cy="80" rx="45" ry="28" fill="#fff" opacity="0.9"/><ellipse cx="90" cy="85" rx="30" ry="20" fill="#fff"/><path d="M0,175 Q40,145 90,165 Q140,135 200,155 L200,260 L0,260 Z" fill="#8DB84A"/><path d="M0,195 Q55,165 110,185 Q160,155 200,175 L200,260 L0,260 Z" fill="#6B943A"/></svg></div>
-                            <span class="spot-label">PENCIL CASES</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ PAGE: DROP A SPOT ============ -->
-    <div class="page" id="page-drop-a-spot">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link active" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
-                </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
-            <div class="nav-divider"></div>
-        </nav>
-
-        <div class="page-content">
+    <!-- ===== SECTION: DROP A SPOT ===== -->
+    <section id="drop-a-spot" class="section">
+        <div class="section-content">
+            <h2 class="page-title">DROP A SPOT</h2>
             <div class="form-container">
                 <form onsubmit="handleDropSpot(event)">
                     <input type="text" placeholder="NAME" class="form-input" required>
                     <input type="text" placeholder="CATEGORY (BAR, ART GALLERY, HIDDEN GEMS)" class="form-input" required>
                     <input type="text" placeholder="LOCATION" class="form-input" required>
-                    <input type="text" placeholder="VIBE  (EXAMPLE: CHILL, OUTDOORSY ETC)" class="form-input">
+                    <input type="text" placeholder="VIBE (EXAMPLE: CHILL, OUTDOORSY ETC)" class="form-input">
                     <textarea placeholder="SHORT DESCRIPTION" class="form-input form-textarea" rows="5"></textarea>
                     <button type="submit" class="btn btn-submit">SUBMIT</button>
                 </form>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ============ PAGE: MEMORY BOX ============ -->
-    <div class="page" id="page-memory-box">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link active" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
+    <!-- ===== SECTION: MEMORY BOX ===== -->
+    <section id="memory-box" class="section">
+        <div class="section-content">
+            <h2 class="page-title">MEMORY BOX</h2>
+            <div class="tab-bar">
+                <button class="tab-btn active" onclick="switchTab('grid-tab', this)">THE GRID</button>
+                <button class="tab-btn" onclick="switchTab('snaps-tab', this)">SNAPS</button>
+            </div>
+            <!-- THE GRID: Tirana City Map -->
+            <div id="grid-tab" class="tab-content active">
+                <div id="tirana-map" class="map-container"></div>
+            </div>
+            <!-- SNAPS: Photos + Add + Join the Vibe -->
+            <div id="snaps-tab" class="tab-content">
+                <div class="snaps-grid" id="snaps-grid">
+                    <div class="snap-item" style="background: linear-gradient(135deg, #E5A100, #CC8E00);">
+                        <div class="snap-overlay"><span class="snap-location">@ Blloku</span><span class="snap-caption">Muzike live ne rruge</span></div>
+                    </div>
+                    <div class="snap-item" style="background: linear-gradient(135deg, #E8524A, #C73030);">
+                        <div class="snap-overlay"><span class="snap-location">@ Liqeni</span><span class="snap-caption">Yoga ne agim</span></div>
+                    </div>
+                    <div class="snap-item" style="background: linear-gradient(135deg, #7BA7CC, #4A7BA7);">
+                        <div class="snap-overlay"><span class="snap-location">@ Pazari i Ri</span><span class="snap-caption">Street food vibes</span></div>
+                    </div>
+                    <div class="snap-item" style="background: linear-gradient(135deg, #5B9A6B, #3D7A4D);">
+                        <div class="snap-overlay"><span class="snap-location">@ Dajti</span><span class="snap-caption">Hiking me shoke</span></div>
+                    </div>
+                    <div class="snap-item" style="background: linear-gradient(135deg, #8B6B9B, #6B4B7B);">
+                        <div class="snap-overlay"><span class="snap-location">@ Komuna</span><span class="snap-caption">Art night</span></div>
+                    </div>
+                    <div class="snap-item" style="background: linear-gradient(135deg, #1a1a1a, #555);">
+                        <div class="snap-overlay"><span class="snap-location">@ Piramida</span><span class="snap-caption">Sunset chill</span></div>
+                    </div>
+                    <!-- Add Photo button -->
+                    <div class="snap-item snap-add" onclick="document.getElementById('photo-input').click()">
+                        <span class="snap-add-icon">+</span>
+                        <span class="snap-add-text">ADD PHOTO</span>
+                        <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="addSnap(this)">
+                    </div>
                 </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
-            <div class="nav-divider"></div>
-        </nav>
-
-        <div class="page-content hero-page">
-            <div class="hero-center">
-                <div class="hero-buttons">
-                    <button class="btn btn-page" onclick="showPage('the-grid')">THE GRID</button>
-                    <button class="btn btn-page" onclick="showPage('snaps')">SNAPS</button>
+                <div class="snaps-join-vibe">
+                    <button class="btn btn-page" onclick="scrollToSection('join-the-vibe')">JOIN THE VIBE</button>
                 </div>
-            </div>
-            <!-- Cloud illustration on right -->
-            <div class="memory-cloud-wrap">
-                <svg viewBox="0 0 220 200" class="cloud-illustration">
-                    <ellipse cx="130" cy="65" rx="65" ry="45" fill="#7BA7CC" opacity="0.85"/>
-                    <ellipse cx="85" cy="85" rx="50" ry="35" fill="#E8524A" opacity="0.75"/>
-                    <!-- Drops -->
-                    <ellipse cx="90" cy="140" rx="10" ry="15" fill="#E8524A" opacity="0.8"/>
-                    <ellipse cx="125" cy="155" rx="12" ry="18" fill="#E5A100" opacity="0.8"/>
-                </svg>
-            </div>
-            <!-- Red wave at bottom -->
-            <div class="memory-wave">
-                <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-                    <path d="M0,80 Q180,20 360,80 Q540,140 720,80 Q900,20 1080,80 Q1260,140 1440,80 L1440,120 L0,120 Z" fill="#E8524A"/>
-                </svg>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ============ PAGE: THE GRID ============ -->
-    <div class="page" id="page-the-grid">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link active" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
-                </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
-            <div class="nav-divider"></div>
-        </nav>
-        <div class="page-content">
-            <h2 class="page-title">THE GRID</h2>
-            <div class="photo-grid">
-                <div class="grid-item gi-tall" style="background: linear-gradient(135deg, #E5A100, #D4960A);"><div class="grid-overlay"><span>Blloku</span></div></div>
-                <div class="grid-item" style="background: linear-gradient(135deg, #E8524A, #C73030);"><div class="grid-overlay"><span>Liqeni</span></div></div>
-                <div class="grid-item" style="background: linear-gradient(135deg, #7BA7CC, #5B87AC);"><div class="grid-overlay"><span>Pazari i Ri</span></div></div>
-                <div class="grid-item gi-wide" style="background: linear-gradient(135deg, #5B9A6B, #3D7A4D);"><div class="grid-overlay"><span>Dajti</span></div></div>
-                <div class="grid-item" style="background: linear-gradient(135deg, #8B6B9B, #6B4B7B);"><div class="grid-overlay"><span>Tirana e Re</span></div></div>
-                <div class="grid-item gi-tall" style="background: linear-gradient(135deg, #1a1a1a, #444);"><div class="grid-overlay"><span>Piramida</span></div></div>
-                <div class="grid-item" style="background: linear-gradient(135deg, #E5A100, #E8524A);"><div class="grid-overlay"><span>Komuna</span></div></div>
-                <div class="grid-item" style="background: linear-gradient(135deg, #5B9A6B, #7BA7CC);"><div class="grid-overlay"><span>Sahati</span></div></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ PAGE: SNAPS ============ -->
-    <div class="page" id="page-snaps">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link active" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
-                </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
-            <div class="nav-divider"></div>
-        </nav>
-        <div class="page-content">
-            <h2 class="page-title">SNAPS</h2>
-            <div class="snaps-grid">
-                <div class="snap-item" style="background: linear-gradient(135deg, #E5A100, #CC8E00);"><div class="snap-overlay"><span class="snap-location">@ Blloku</span><span class="snap-caption">Muzike live ne rruge</span></div></div>
-                <div class="snap-item" style="background: linear-gradient(135deg, #E8524A, #C73030);"><div class="snap-overlay"><span class="snap-location">@ Liqeni</span><span class="snap-caption">Yoga ne agim</span></div></div>
-                <div class="snap-item" style="background: linear-gradient(135deg, #7BA7CC, #4A7BA7);"><div class="snap-overlay"><span class="snap-location">@ Pazari i Ri</span><span class="snap-caption">Street food vibes</span></div></div>
-                <div class="snap-item" style="background: linear-gradient(135deg, #5B9A6B, #3D7A4D);"><div class="snap-overlay"><span class="snap-location">@ Dajti</span><span class="snap-caption">Hiking me shoke</span></div></div>
-                <div class="snap-item" style="background: linear-gradient(135deg, #8B6B9B, #6B4B7B);"><div class="snap-overlay"><span class="snap-location">@ Komuna</span><span class="snap-caption">Art night</span></div></div>
-                <div class="snap-item" style="background: linear-gradient(135deg, #1a1a1a, #555);"><div class="snap-overlay"><span class="snap-location">@ Piramida</span><span class="snap-caption">Sunset chill</span></div></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ PAGE: JOIN THE VIBE (step 1) ============ -->
-    <div class="page" id="page-join-the-vibe">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link active" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
-                </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
-            <div class="nav-divider"></div>
-        </nav>
-
-        <div class="page-content">
+    <!-- ===== SECTION: JOIN THE VIBE ===== -->
+    <section id="join-the-vibe" class="section">
+        <div class="section-content">
+            <h2 class="page-title">JOIN THE VIBE</h2>
             <div class="form-container">
-                <form onsubmit="handleJoinStep1(event)">
-                    <input type="text" placeholder="NAME" class="form-input" required>
-                    <input type="text" placeholder="SURNAME" class="form-input" required>
-                    <input type="date" placeholder="BIRTHDAY" class="form-input" required>
-                    <select class="form-input form-select" required>
-                        <option value="" disabled selected>GENDER</option>
-                        <option value="female">Female</option>
-                        <option value="male">Male</option>
-                        <option value="other">Other</option>
-                        <option value="prefer-not">Prefer not to say</option>
-                    </select>
-                    <input type="email" placeholder="EMAIL" class="form-input" required>
-                    <button type="submit" class="btn btn-submit">SUBMIT</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ PAGE: JOIN - INTERESTS ============ -->
-    <div class="page" id="page-interests">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
-                    <svg viewBox="0 0 50 60" width="40" height="48"><circle cx="25" cy="35" r="20" fill="#1a1a1a"/><ellipse cx="25" cy="38" rx="7" ry="11" fill="#E5A100" transform="rotate(-15 25 38)"/><polygon points="20,10 30,18 18,18" fill="#1a1a1a"/></svg>
-                </a>
-                <div class="nav-links">
-                    <a href="#" class="nav-link" onclick="showPage('city-pulse'); return false;">CITY PULSE</a>
-                    <a href="#" class="nav-link" onclick="showPage('urban-relics'); return false;">URBAN RELICS</a>
-                    <a href="#" class="nav-link" onclick="showPage('drop-a-spot'); return false;">DROP A SPOT</a>
-                    <a href="#" class="nav-link" onclick="showPage('memory-box'); return false;">MEMORY BOX</a>
-                    <a href="#" class="nav-link active" onclick="showPage('join-the-vibe'); return false;">JOIN THE VIBE</a>
+                <div id="join-step1">
+                    <form onsubmit="handleJoinStep1(event)">
+                        <input type="text" placeholder="NAME" class="form-input" required>
+                        <input type="text" placeholder="SURNAME" class="form-input" required>
+                        <input type="date" class="form-input" required>
+                        <select class="form-input form-select" required>
+                            <option value="" disabled selected>GENDER</option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                            <option value="other">Other</option>
+                            <option value="prefer-not">Prefer not to say</option>
+                        </select>
+                        <input type="email" placeholder="EMAIL" class="form-input" required>
+                        <button type="submit" class="btn btn-submit">NEXT</button>
+                    </form>
                 </div>
-                <button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
-            </div>
-            <div class="nav-divider"></div>
-        </nav>
-
-        <div class="page-content">
-            <div class="form-container">
-                <form onsubmit="handleInterests(event)">
-                    <div class="interests-header">PICK YOUR INTERESTS</div>
-                    <label class="interest-option"><input type="checkbox" value="music-nightlife"><span class="interest-label">MUSIC/NIGHTLIFE</span></label>
-                    <label class="interest-option"><input type="checkbox" value="art-culture"><span class="interest-label">ART/CULTURE</span></label>
-                    <label class="interest-option"><input type="checkbox" value="entertainment"><span class="interest-label">ENTERTAINMENT</span></label>
-                    <label class="interest-option"><input type="checkbox" value="social-hangouts"><span class="interest-label">SOCIAL/HANGOUTS</span></label>
-                    <label class="interest-option"><input type="checkbox" value="lifestyle"><span class="interest-label">LIFESTYLE</span></label>
-                    <label class="interest-option"><input type="checkbox" value="learning-networking"><span class="interest-label">LEARNING/NETWORKING</span></label>
-                    <button type="submit" class="btn btn-submit">SUBMIT</button>
-                </form>
+                <div id="join-step2" style="display:none;">
+                    <form onsubmit="handleInterests(event)">
+                        <div class="interests-header">PICK YOUR INTERESTS</div>
+                        <label class="interest-option"><input type="checkbox" value="music-nightlife"><span class="interest-label">MUSIC / NIGHTLIFE</span></label>
+                        <label class="interest-option"><input type="checkbox" value="art-culture"><span class="interest-label">ART / CULTURE</span></label>
+                        <label class="interest-option"><input type="checkbox" value="entertainment"><span class="interest-label">ENTERTAINMENT</span></label>
+                        <label class="interest-option"><input type="checkbox" value="social-hangouts"><span class="interest-label">SOCIAL / HANGOUTS</span></label>
+                        <label class="interest-option"><input type="checkbox" value="lifestyle"><span class="interest-label">LIFESTYLE</span></label>
+                        <label class="interest-option"><input type="checkbox" value="learning-networking"><span class="interest-label">LEARNING / NETWORKING</span></label>
+                        <button type="submit" class="btn btn-submit">SUBMIT</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Success Modal -->
     <div class="modal-overlay" id="successModal">
@@ -603,6 +279,7 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
