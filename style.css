@@ -152,7 +152,18 @@ body {
     align-items: center;
     justify-content: center;
     min-height: calc(100vh - var(--navbar-height));
-    padding: 40px 50px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .section-content {
@@ -172,27 +183,6 @@ body {
     margin-bottom: 32px;
     color: var(--brown);
     letter-spacing: 1.5px;
-}
-
-/* ===== HERO ===== */
-.hero-center {
-    text-align: center;
-}
-
-.hero-quote {
-    font-family: var(--font-body);
-    font-size: 17px;
-    color: var(--brown);
-    margin-bottom: 32px;
-    font-weight: 400;
-    letter-spacing: 0.3px;
-}
-
-.hero-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    align-items: center;
 }
 
 /* ===== BUTTONS ===== */
