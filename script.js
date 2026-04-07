@@ -40,13 +40,45 @@ function switchTab(tabId, btn) {
     if (tabId === 'grid-tab') setTimeout(initMap, 50);
 }
 
-// ===== URBAN RELICS TAB SWITCHING (sidebar) =====
+// ===== URBAN RELICS TAB SWITCHING =====
 function switchUrbanTab(tabId, btn) {
     const layout = btn.closest('.urban-relics-layout');
     layout.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     layout.querySelectorAll('.tab-btn-side').forEach(b => b.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
     btn.classList.add('active');
+}
+
+// ===== HOT SPOTS CAROUSEL =====
+function openCarousel(category) {
+    document.getElementById('hotspots-grid').style.display = 'none';
+    document.getElementById('carousel-' + category).style.display = 'block';
+}
+
+function closeCarousel(category) {
+    document.getElementById('carousel-' + category).style.display = 'none';
+    document.getElementById('hotspots-grid').style.display = 'grid';
+}
+
+// ===== CAROUSEL CARD SELECT (enlarge on click) =====
+function selectCarouselCard(card) {
+    const track = card.closest('.carousel-track');
+    const wasSelected = card.classList.contains('selected');
+    track.querySelectorAll('.carousel-card').forEach(c => c.classList.remove('selected'));
+    if (!wasSelected) {
+        card.classList.add('selected');
+    }
+}
+
+// ===== PULSE EVENT VIEWS =====
+function openPulseEvent(category) {
+    document.getElementById('pulse-grid').style.display = 'none';
+    document.getElementById('pulse-' + category).style.display = 'block';
+}
+
+function closePulseEvent(category) {
+    document.getElementById('pulse-' + category).style.display = 'none';
+    document.getElementById('pulse-grid').style.display = 'grid';
 }
 
 // ===== TIRANA MAP =====
@@ -65,66 +97,19 @@ function initMap() {
     }).addTo(mapInstance);
 
     const pins = [
-        {
-            lat: 41.3255, lng: 19.8153,
-            name: 'Blloku',
-            date: 'March 2024',
-            desc: 'The hippest neighborhood in Tirana — cafes, bars, galleries and vibrant nightlife.'
-        },
-        {
-            lat: 41.3360, lng: 19.8220,
-            name: 'Liqeni i Thate',
-            date: 'April 2024',
-            desc: 'Beautiful artificial lake park — perfect for morning walks, yoga and sunset vibes.'
-        },
-        {
-            lat: 41.3295, lng: 19.8195,
-            name: 'Pazari i Ri',
-            date: 'February 2024',
-            desc: 'The new bazaar — fresh produce, artisan crafts, street food and local character.'
-        },
-        {
-            lat: 41.3836, lng: 19.8583,
-            name: 'Dajti',
-            date: 'May 2024',
-            desc: 'Mount Dajti — accessible by cable car. Hiking trails and panoramic city views.'
-        },
-        {
-            lat: 41.3200, lng: 19.8100,
-            name: 'Tirana e Re',
-            date: 'January 2024',
-            desc: 'Modern Tirana with contemporary architecture and urban energy.'
-        },
-        {
-            lat: 41.3265, lng: 19.8172,
-            name: 'Piramida',
-            date: 'March 2024',
-            desc: 'The iconic pyramid — reborn as a youth cultural center and creative hub.'
-        },
-        {
-            lat: 41.3310, lng: 19.8255,
-            name: 'Komuna e Parisit',
-            date: 'June 2024',
-            desc: 'Artsy neighborhood with murals, galleries, and quirky cafes tucked in leafy streets.'
-        },
-        {
-            lat: 41.3288, lng: 19.8165,
-            name: 'Sahati',
-            date: 'December 2023',
-            desc: 'The historic Clock Tower — the symbolic beating heart of old Tirana.'
-        }
+        { lat: 41.3255, lng: 19.8153, name: 'Blloku', date: 'March 2024', desc: 'The hippest neighborhood in Tirana \u2014 cafes, bars, galleries and vibrant nightlife.' },
+        { lat: 41.3360, lng: 19.8220, name: 'Liqeni i Thate', date: 'April 2024', desc: 'Beautiful artificial lake park \u2014 perfect for morning walks, yoga and sunset vibes.' },
+        { lat: 41.3295, lng: 19.8195, name: 'Pazari i Ri', date: 'February 2024', desc: 'The new bazaar \u2014 fresh produce, artisan crafts, street food and local character.' },
+        { lat: 41.3836, lng: 19.8583, name: 'Dajti', date: 'May 2024', desc: 'Mount Dajti \u2014 accessible by cable car. Hiking trails and panoramic city views.' },
+        { lat: 41.3200, lng: 19.8100, name: 'Tirana e Re', date: 'January 2024', desc: 'Modern Tirana with contemporary architecture and urban energy.' },
+        { lat: 41.3265, lng: 19.8172, name: 'Piramida', date: 'March 2024', desc: 'The iconic pyramid \u2014 reborn as a youth cultural center and creative hub.' },
+        { lat: 41.3310, lng: 19.8255, name: 'Komuna e Parisit', date: 'June 2024', desc: 'Artsy neighborhood with murals, galleries, and quirky cafes tucked in leafy streets.' },
+        { lat: 41.3288, lng: 19.8165, name: 'Sahati', date: 'December 2023', desc: 'The historic Clock Tower \u2014 the symbolic beating heart of old Tirana.' }
     ];
 
     const pinIcon = L.divIcon({
         className: '',
-        html: `<div style="
-            width:20px; height:28px;
-            background:#E8524A;
-            border-radius:50% 50% 50% 0;
-            transform:rotate(-45deg);
-            border:2.5px solid #fff;
-            box-shadow:0 2px 8px rgba(0,0,0,0.28);
-        "></div>`,
+        html: '<div style="width:20px;height:28px;background:#E8524A;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.28);"></div>',
         iconSize: [20, 28],
         iconAnchor: [10, 28],
         popupAnchor: [0, -32]
@@ -133,13 +118,14 @@ function initMap() {
     pins.forEach(p => {
         L.marker([p.lat, p.lng], { icon: pinIcon })
             .addTo(mapInstance)
-            .bindPopup(`
-                <div style="font-family:'Inter',sans-serif;min-width:180px;padding:2px 0;">
-                    <strong style="font-size:14px;color:#3D2B1F;">${p.name}</strong><br>
-                    <span style="font-size:11px;color:#E5A100;font-weight:700;letter-spacing:0.5px;">${p.date}</span>
-                    <p style="font-size:12px;color:#3D2B1F;margin-top:6px;line-height:1.5;">${p.desc}</p>
-                </div>
-            `, { maxWidth: 220 });
+            .bindPopup(
+                '<div style="font-family:Inter,sans-serif;min-width:180px;padding:2px 0;">' +
+                '<strong style="font-size:14px;color:#3D2B1F;">' + p.name + '</strong><br>' +
+                '<span style="font-size:11px;color:#E5A100;font-weight:700;letter-spacing:0.5px;">' + p.date + '</span>' +
+                '<p style="font-size:12px;color:#3D2B1F;margin-top:6px;line-height:1.5;">' + p.desc + '</p>' +
+                '</div>',
+                { maxWidth: 220 }
+            );
     });
 }
 
@@ -150,15 +136,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===== SNAPS: ADD PHOTO =====
 function addSnap(input) {
     if (!input.files || !input.files[0]) return;
-    const url = URL.createObjectURL(input.files[0]);
-    const item = document.createElement('div');
+    var url = URL.createObjectURL(input.files[0]);
+    var item = document.createElement('div');
     item.className = 'snap-item';
-    item.style.backgroundImage = `url(${url})`;
-    item.innerHTML = `<div class="snap-overlay">
-        <span class="snap-location">@ My Spot</span>
-        <span class="snap-caption">New memory</span>
-    </div>`;
-    const grid = document.getElementById('snaps-grid');
+    item.style.backgroundImage = 'url(' + url + ')';
+    item.innerHTML = '<div class="snap-overlay"><span class="snap-location">@ My Spot</span><span class="snap-caption">New memory</span></div>';
+    var grid = document.getElementById('snaps-grid');
     grid.insertBefore(item, grid.querySelector('.snap-add'));
     input.value = '';
 }
@@ -166,7 +149,7 @@ function addSnap(input) {
 // ===== FORM HANDLERS =====
 function handleDropSpot(e) {
     e.preventDefault();
-    showModal('Your spot has been submitted! The community will review it.');
+    showModal('Faleminderit!', 'Your spot has been submitted! The community will review it.');
     e.target.reset();
 }
 
@@ -178,14 +161,15 @@ function handleJoinStep1(e) {
 
 function handleInterests(e) {
     e.preventDefault();
-    showModal('Welcome to the vibe! Check your email for confirmation.');
+    showModal('Welcome to the vibe!', 'You are deeply appreciated.\nCheck your email for the confirmation.');
     e.target.reset();
     document.getElementById('join-step2').style.display = 'none';
     document.getElementById('join-step1').style.display = 'block';
 }
 
 // ===== MODAL =====
-function showModal(text) {
+function showModal(title, text) {
+    document.getElementById('modalTitle').textContent = title;
     document.getElementById('modalText').textContent = text;
     document.getElementById('successModal').classList.add('show');
 }
@@ -194,10 +178,10 @@ function closeModal() {
     document.getElementById('successModal').classList.remove('show');
 }
 
-document.addEventListener('click', e => {
+document.addEventListener('click', function(e) {
     if (e.target.id === 'successModal') closeModal();
 });
 
-document.addEventListener('keydown', e => {
+document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
 });

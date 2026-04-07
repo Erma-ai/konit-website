@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <!-- ===== SINGLE STICKY NAVBAR ===== -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="main-nav">
         <div class="nav-container">
             <a href="#home" class="logo">
@@ -32,14 +32,14 @@
         <div class="nav-divider"></div>
     </nav>
 
-    <!-- ===== SECTION: HOME ===== -->
+    <!-- ===== HOME ===== -->
     <section id="home" class="section section-hero">
         <video class="hero-video" autoplay muted loop playsinline>
             <source src="hero-video.mp4" type="video/mp4">
         </video>
     </section>
 
-    <!-- ===== SECTION: CITY PULSE ===== -->
+    <!-- ===== CITY PULSE ===== -->
     <section id="city-pulse" class="section">
         <div class="section-content">
             <h2 class="page-title">CITY PULSE</h2>
@@ -47,57 +47,181 @@
                 <button class="tab-btn active" onclick="switchTab('hot-spots-tab', this)">HOT SPOTS</button>
                 <button class="tab-btn" onclick="switchTab('pulse-tab', this)">PULSE</button>
             </div>
+
+            <!-- HOT SPOTS -->
             <div id="hot-spots-tab" class="tab-content active">
-                <div class="card-row four-col">
-                    <div class="spot-card">
+                <div class="card-row four-col" id="hotspots-grid">
+                    <div class="spot-card" onclick="openCarousel('bars')">
                         <div class="spot-image placeholder-img"></div>
                         <span class="spot-label">BARS</span>
                     </div>
-                    <div class="spot-card">
+                    <div class="spot-card" onclick="openCarousel('galleries')">
                         <div class="spot-image placeholder-img"></div>
                         <span class="spot-label">ART GALLERIES</span>
                     </div>
-                    <div class="spot-card">
+                    <div class="spot-card" onclick="openCarousel('cultural')">
                         <div class="spot-image placeholder-img"></div>
                         <span class="spot-label">CULTURAL SPACES</span>
                     </div>
-                    <div class="spot-card">
+                    <div class="spot-card" onclick="openCarousel('clubs')">
                         <div class="spot-image placeholder-img"></div>
                         <span class="spot-label">CLUBS</span>
                     </div>
                 </div>
+
+                <!-- Carousels for each Hot Spot category -->
+                <div id="carousel-bars" class="carousel-view" style="display:none;">
+                    <button class="btn-back" onclick="closeCarousel('bars')">&larr; BACK</button>
+                    <h3 class="carousel-title">BARS</h3>
+                    <div class="carousel-track">
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Radio Bar</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Nouvelle Vague</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Colonial Bar</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Komiteti Cafe Museum</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Hemingway Bar</span></div>
+                    </div>
+                </div>
+
+                <div id="carousel-galleries" class="carousel-view" style="display:none;">
+                    <button class="btn-back" onclick="closeCarousel('galleries')">&larr; BACK</button>
+                    <h3 class="carousel-title">ART GALLERIES</h3>
+                    <div class="carousel-track">
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Zeta Art Gallery</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Gocat Art Gallery</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Harabel Contemporary</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">National Gallery of Arts</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">FAB Gallery</span></div>
+                    </div>
+                </div>
+
+                <div id="carousel-cultural" class="carousel-view" style="display:none;">
+                    <button class="btn-back" onclick="closeCarousel('cultural')">&larr; BACK</button>
+                    <h3 class="carousel-title">CULTURAL SPACES</h3>
+                    <div class="carousel-track">
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Bunk'Art</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Bank of Albania Museum</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">House of Leaves</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">National Historical Museum</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">National Archaeological Museum</span></div>
+                    </div>
+                </div>
+
+                <div id="carousel-clubs" class="carousel-view" style="display:none;">
+                    <button class="btn-back" onclick="closeCarousel('clubs')">&larr; BACK</button>
+                    <h3 class="carousel-title">CLUBS</h3>
+                    <div class="carousel-track">
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Club 1</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Club 2</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Club 3</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Club 4</span></div>
+                        <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">Club 5</span></div>
+                    </div>
+                </div>
             </div>
+
+            <!-- PULSE -->
             <div id="pulse-tab" class="tab-content">
-                <div class="card-row five-col">
-                    <div class="spot-card">
+                <div class="card-row five-col" id="pulse-grid">
+                    <div class="spot-card" onclick="openPulseEvent('music')">
                         <div class="spot-image placeholder-img"></div>
                         <span class="spot-label">MUSIC</span>
                     </div>
-                    <div class="spot-card">
+                    <div class="spot-card" onclick="openPulseEvent('art')">
                         <div class="spot-image placeholder-img"></div>
                         <span class="spot-label">ART</span>
                     </div>
-                    <div class="spot-card">
+                    <div class="spot-card" onclick="openPulseEvent('sport')">
                         <div class="spot-image placeholder-img"></div>
                         <span class="spot-label">SPORT</span>
                     </div>
-                    <div class="spot-card">
+                    <div class="spot-card" onclick="openPulseEvent('culinary')">
                         <div class="spot-image placeholder-img"></div>
                         <span class="spot-label">CULINARY</span>
                     </div>
-                    <div class="spot-card">
+                    <div class="spot-card" onclick="openPulseEvent('hidden-gems')">
                         <div class="spot-image placeholder-img"></div>
                         <span class="spot-label">HIDDEN GEMS</span>
+                    </div>
+                </div>
+
+                <!-- Pulse Event Views -->
+                <div id="pulse-music" class="pulse-event" style="display:none;">
+                    <button class="btn-back" onclick="closePulseEvent('music')">&larr; BACK</button>
+                    <div class="event-layout">
+                        <div class="event-left">
+                            <div class="event-image placeholder-img"></div>
+                            <button class="btn btn-hop">HOP IN</button>
+                        </div>
+                        <div class="event-right">
+                            <h3 class="event-title">MUSIC</h3>
+                            <p class="event-desc">Imagine headphones on, vibing to hidden DJs, tucked into Tirana's Botanical Garden, city skyline dim in the background. Plug in, tune out, lose yourself: headphones on, vibes only, natural sounds blending with beats — intimate, artsy, secret, and totally IG-worthy. It's not a party, it's a silent adventure for the crew who knows.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pulse-art" class="pulse-event" style="display:none;">
+                    <button class="btn-back" onclick="closePulseEvent('art')">&larr; BACK</button>
+                    <div class="event-layout">
+                        <div class="event-left">
+                            <div class="event-image placeholder-img"></div>
+                            <button class="btn btn-hop">HOP IN</button>
+                        </div>
+                        <div class="event-right">
+                            <h3 class="event-title">ART</h3>
+                            <p class="event-desc">Step into Tulla Culture Center and make art together like never before — a blank wall, a shared vision, and your creativity in every stroke. Each participant adds a piece, turning individual ideas into a massive, collaborative artwork that lives in the space long after the event. Underground, hands-on, and full of energy, it's a playground for art lovers who want to leave their mark on Tirana.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pulse-sport" class="pulse-event" style="display:none;">
+                    <button class="btn-back" onclick="closePulseEvent('sport')">&larr; BACK</button>
+                    <div class="event-layout">
+                        <div class="event-left">
+                            <div class="event-image placeholder-img"></div>
+                            <button class="btn btn-hop">HOP IN</button>
+                        </div>
+                        <div class="event-right">
+                            <h3 class="event-title">SPORT</h3>
+                            <p class="event-desc">Swap the studio for open air and let the Tirana Zoo become your yoga sanctuary. Flow through each pose surrounded by greenery, open skies, and the subtle hum of nature. It's a practice that feels alive, calm, and inspiring — a serene, unconventional space where yoga meets the peaceful rhythm of the wild.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pulse-culinary" class="pulse-event" style="display:none;">
+                    <button class="btn-back" onclick="closePulseEvent('culinary')">&larr; BACK</button>
+                    <div class="event-layout">
+                        <div class="event-left">
+                            <div class="event-image placeholder-img"></div>
+                            <button class="btn btn-hop">HOP IN</button>
+                        </div>
+                        <div class="event-right">
+                            <h3 class="event-title">CULINARY</h3>
+                            <p class="event-desc">Roll up your sleeves at Luga e Argjendte and make pasta from scratch — knead, twist, and shape your own fresh noodles while soaking in the scenic vibes. It's hands-on, chill, and full of foodie energy — the perfect mix of craft, creativity, and taste.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pulse-hidden-gems" class="pulse-event" style="display:none;">
+                    <button class="btn-back" onclick="closePulseEvent('hidden-gems')">&larr; BACK</button>
+                    <div class="event-layout">
+                        <div class="event-left">
+                            <div class="event-image placeholder-img"></div>
+                            <button class="btn btn-hop">HOP IN</button>
+                        </div>
+                        <div class="event-right">
+                            <h3 class="event-title">HIDDEN GEMS</h3>
+                            <p class="event-desc">Tirana Treasure Hunt drops you in Lake Park with a map in hand and a mission: chase hidden clues, uncover your mosaic piece, and vibe through the city's green heart. By the end, everyone links up to assemble a giant, one-of-a-kind artwork — a collaborative, underground masterpiece that's part adventure, part art, all energy.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== SECTION: URBAN RELICS ===== -->
+    <!-- ===== URBAN RELICS ===== -->
     <section id="urban-relics" class="section">
         <div class="section-content">
-            <h2 class="page-title">URBAN RELICS</h2>
+            <h2 class="page-title urban-relics-title">URBAN RELICS</h2>
             <div class="urban-relics-layout">
                 <div class="urban-relics-sidebar">
                     <button class="tab-btn-side active" onclick="switchUrbanTab('fits-tab', this)">FITS</button>
@@ -106,51 +230,24 @@
                 </div>
                 <div class="urban-relics-content">
                     <div id="fits-tab" class="tab-content active">
-                        <div class="card-row four-col">
-                            <div class="spot-card">
-                                <div class="spot-image placeholder-img"></div>
-                                <span class="spot-label">T-SHIRTS</span>
-                            </div>
-                            <div class="spot-card">
-                                <div class="spot-image placeholder-img"></div>
-                                <span class="spot-label">TOTES</span>
-                            </div>
-                            <div class="spot-card">
-                                <div class="spot-image placeholder-img"></div>
-                                <span class="spot-label">SOCKS</span>
-                            </div>
-                            <div class="spot-card">
-                                <div class="spot-image placeholder-img"></div>
-                                <span class="spot-label">HATS</span>
-                            </div>
+                        <div class="carousel-track">
+                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">T-SHIRTS</span></div>
+                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">TOTES</span></div>
+                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">SOCKS</span></div>
+                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">HATS</span></div>
                         </div>
                     </div>
                     <div id="urban-gear-tab" class="tab-content">
-                        <div class="card-row three-col">
-                            <div class="spot-card">
-                                <div class="spot-image placeholder-img"></div>
-                                <span class="spot-label">STICKERS</span>
-                            </div>
-                            <div class="spot-card">
-                                <div class="spot-image placeholder-img"></div>
-                                <span class="spot-label">PHONE CASES</span>
-                            </div>
-                            <div class="spot-card">
-                                <div class="spot-image placeholder-img"></div>
-                                <span class="spot-label">KEYCHAINS</span>
-                            </div>
+                        <div class="carousel-track">
+                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">STICKERS</span></div>
+                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">PHONE CASES</span></div>
+                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">KEYCHAINS</span></div>
                         </div>
                     </div>
                     <div id="creative-tools-tab" class="tab-content">
-                        <div class="card-row two-col">
-                            <div class="spot-card">
-                                <div class="spot-image placeholder-img"></div>
-                                <span class="spot-label">NOTEBOOKS</span>
-                            </div>
-                            <div class="spot-card">
-                                <div class="spot-image placeholder-img"></div>
-                                <span class="spot-label">PENCIL CASES</span>
-                            </div>
+                        <div class="carousel-track">
+                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">NOTEBOOKS</span></div>
+                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">PENCIL CASES</span></div>
                         </div>
                     </div>
                 </div>
@@ -158,7 +255,7 @@
         </div>
     </section>
 
-    <!-- ===== SECTION: DROP A SPOT ===== -->
+    <!-- ===== DROP A SPOT ===== -->
     <section id="drop-a-spot" class="section">
         <div class="section-content">
             <h2 class="page-title">DROP A SPOT</h2>
@@ -175,7 +272,7 @@
         </div>
     </section>
 
-    <!-- ===== SECTION: MEMORY BOX ===== -->
+    <!-- ===== MEMORY BOX ===== -->
     <section id="memory-box" class="section">
         <div class="section-content">
             <h2 class="page-title">MEMORY BOX</h2>
@@ -183,11 +280,9 @@
                 <button class="tab-btn active" onclick="switchTab('grid-tab', this)">THE GRID</button>
                 <button class="tab-btn" onclick="switchTab('snaps-tab', this)">SNAPS</button>
             </div>
-            <!-- THE GRID: Tirana City Map -->
             <div id="grid-tab" class="tab-content active">
                 <div id="tirana-map" class="map-container"></div>
             </div>
-            <!-- SNAPS: Photos + Add + Join the Vibe -->
             <div id="snaps-tab" class="tab-content">
                 <div class="snaps-grid" id="snaps-grid">
                     <div class="snap-item" style="background: linear-gradient(135deg, #E5A100, #CC8E00);">
@@ -208,21 +303,17 @@
                     <div class="snap-item" style="background: linear-gradient(135deg, #1a1a1a, #555);">
                         <div class="snap-overlay"><span class="snap-location">@ Piramida</span><span class="snap-caption">Sunset chill</span></div>
                     </div>
-                    <!-- Add Photo button -->
                     <div class="snap-item snap-add" onclick="document.getElementById('photo-input').click()">
                         <span class="snap-add-icon">+</span>
                         <span class="snap-add-text">ADD PHOTO</span>
                         <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="addSnap(this)">
                     </div>
                 </div>
-                <div class="snaps-join-vibe">
-                    <button class="btn btn-page" onclick="scrollToSection('join-the-vibe')">JOIN THE VIBE</button>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== SECTION: JOIN THE VIBE ===== -->
+    <!-- ===== JOIN THE VIBE ===== -->
     <section id="join-the-vibe" class="section">
         <div class="section-content">
             <h2 class="page-title">JOIN THE VIBE</h2>
@@ -231,7 +322,7 @@
                     <form onsubmit="handleJoinStep1(event)">
                         <input type="text" placeholder="NAME" class="form-input" required>
                         <input type="text" placeholder="SURNAME" class="form-input" required>
-                        <input type="date" class="form-input" required>
+                        <input type="text" placeholder="BIRTHDAY" class="form-input" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'" required>
                         <select class="form-input form-select" required>
                             <option value="" disabled selected>GENDER</option>
                             <option value="female">Female</option>
@@ -252,7 +343,7 @@
                         <label class="interest-option"><input type="checkbox" value="social-hangouts"><span class="interest-label">SOCIAL / HANGOUTS</span></label>
                         <label class="interest-option"><input type="checkbox" value="lifestyle"><span class="interest-label">LIFESTYLE</span></label>
                         <label class="interest-option"><input type="checkbox" value="learning-networking"><span class="interest-label">LEARNING / NETWORKING</span></label>
-                        <button type="submit" class="btn btn-submit">SUBMIT</button>
+                        <button type="submit" class="btn btn-submit">JOIN IN</button>
                     </form>
                 </div>
             </div>
@@ -266,7 +357,7 @@
                 <circle cx="40" cy="40" r="35" fill="#5B9A6B"/>
                 <polyline points="25,42 35,52 55,30" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <h3 class="modal-title">Faleminderit!</h3>
+            <h3 class="modal-title" id="modalTitle">Faleminderit!</h3>
             <p class="modal-text" id="modalText">Your submission has been received.</p>
             <button class="btn btn-submit" onclick="closeModal()">OK</button>
         </div>

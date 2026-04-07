@@ -52,7 +52,6 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     padding: 4px 0 2px;
-    gap: 0;
 }
 
 .logo {
@@ -117,10 +116,8 @@ body {
     height: 1.5px;
     background: var(--black);
     opacity: 0.15;
-    margin-top: 0;
 }
 
-/* Hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -185,6 +182,11 @@ body {
     letter-spacing: 1.5px;
 }
 
+.urban-relics-title {
+    text-align: left;
+    width: 100%;
+}
+
 /* ===== BUTTONS ===== */
 .btn {
     display: inline-block;
@@ -228,6 +230,40 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
+.btn-hop {
+    background: var(--beige);
+    color: var(--brown);
+    padding: 14px 40px;
+    border-radius: 30px;
+    margin-top: 16px;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.btn-hop:hover {
+    background: var(--beige-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.btn-back {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--brown);
+    cursor: pointer;
+    padding: 8px 0;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.btn-back:hover {
+    color: var(--red);
+}
+
 /* ===== TAB BAR ===== */
 .tab-bar {
     display: flex;
@@ -254,9 +290,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.tab-btn:hover {
-    background: var(--beige-light);
-}
+.tab-btn:hover { background: var(--beige-light); }
 
 .tab-btn.active {
     color: var(--red);
@@ -278,7 +312,7 @@ body {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== URBAN RELICS LAYOUT (sidebar + content) ===== */
+/* ===== URBAN RELICS LAYOUT ===== */
 .urban-relics-layout {
     display: flex;
     gap: 40px;
@@ -310,9 +344,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.tab-btn-side:hover {
-    background: var(--beige-light);
-}
+.tab-btn-side:hover { background: var(--beige-light); }
 
 .tab-btn-side.active {
     color: var(--red);
@@ -387,6 +419,127 @@ body {
     background: var(--beige);
     padding: 10px 16px;
     border-radius: 25px;
+}
+
+/* ===== CAROUSEL (Hot Spots + Urban Relics) ===== */
+.carousel-view {
+    width: 100%;
+    animation: fadeIn 0.3s ease;
+}
+
+.carousel-title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--brown);
+    letter-spacing: 1px;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 0 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.carousel-track::-webkit-scrollbar {
+    height: 5px;
+}
+
+.carousel-track::-webkit-scrollbar-thumb {
+    background: var(--beige);
+    border-radius: 4px;
+}
+
+.carousel-card {
+    flex: 0 0 200px;
+    cursor: pointer;
+    scroll-snap-align: start;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    border-radius: 14px;
+    overflow: visible;
+}
+
+.carousel-card:hover {
+    transform: translateY(-4px);
+}
+
+.carousel-card.selected {
+    transform: scale(1.12);
+    z-index: 2;
+}
+
+.carousel-card.selected .carousel-img {
+    box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+    outline: 3px solid var(--gold);
+}
+
+.carousel-img {
+    width: 100%;
+    border-radius: 12px;
+    transition: box-shadow 0.35s ease, outline 0.35s ease;
+}
+
+.carousel-label {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    color: var(--brown);
+}
+
+/* ===== PULSE EVENT LAYOUT ===== */
+.pulse-event {
+    width: 100%;
+    animation: fadeIn 0.3s ease;
+}
+
+.event-layout {
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.event-left {
+    flex: 0 0 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.event-image {
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.event-right {
+    flex: 1;
+    min-width: 0;
+    padding-top: 10px;
+}
+
+.event-title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    color: var(--brown);
+    margin-bottom: 16px;
+}
+
+.event-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--brown);
+    opacity: 0.85;
 }
 
 /* ===== FORMS ===== */
@@ -546,9 +699,7 @@ body {
     gap: 8px;
 }
 
-.snap-add:hover {
-    background: var(--beige-light) !important;
-}
+.snap-add:hover { background: var(--beige-light) !important; }
 
 .snap-add-icon {
     font-size: 42px;
@@ -564,12 +715,6 @@ body {
     letter-spacing: 1px;
     color: var(--brown);
     opacity: 0.45;
-}
-
-.snaps-join-vibe {
-    display: flex;
-    justify-content: center;
-    margin-top: 36px;
 }
 
 /* ===== MODAL ===== */
@@ -613,6 +758,7 @@ body {
     color: var(--brown);
     opacity: 0.7;
     margin-bottom: 18px;
+    white-space: pre-line;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -624,6 +770,8 @@ body {
     .urban-relics-layout { gap: 24px; }
     .urban-relics-sidebar { width: 170px; }
     .tab-btn-side { width: 170px; }
+    .event-left { flex: 0 0 260px; }
+    .event-layout { gap: 32px; }
 }
 
 @media (max-width: 768px) {
@@ -660,6 +808,12 @@ body {
         flex-wrap: wrap;
     }
     .tab-btn-side { width: 140px; font-size: 11px; }
+    .urban-relics-title { text-align: center; }
+
+    .event-layout { flex-direction: column; gap: 24px; }
+    .event-left { flex: none; width: 100%; }
+
+    .carousel-card { flex: 0 0 160px; }
 }
 
 @media (max-width: 480px) {
@@ -668,6 +822,7 @@ body {
     .btn-page  { width: 220px; font-size: 12px; }
     .tab-btn   { width: 120px; }
     .tab-btn-side { width: 120px; }
+    .carousel-card { flex: 0 0 140px; }
 }
 
 /* ===== SCROLLBAR ===== */
