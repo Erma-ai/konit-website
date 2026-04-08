@@ -781,66 +781,83 @@ body {
 @media (max-width: 1024px) {
     .five-col  { grid-template-columns: repeat(3, 1fr); }
     .four-col  { grid-template-columns: repeat(2, 1fr); }
-    .navbar    { padding: 0 30px; }
-    .section   { padding: 60px 30px; }
+    .navbar    { padding: 0 24px; }
+    .section   { padding: 60px 24px; min-height: auto; }
+    .section-hero { min-height: calc(100vh - var(--navbar-height)); }
     .urban-relics-layout { gap: 24px; }
     .urban-relics-sidebar { width: 170px; }
     .tab-btn-side { width: 170px; }
     .event-left { flex: 0 0 260px; }
     .event-layout { gap: 32px; }
+    .carousel-card { flex: 0 0 170px; }
 }
 
 /* Tablet portrait + large phones */
 @media (max-width: 768px) {
+    /* -- Navbar -- */
     .hamburger { display: flex; }
-    .navbar    { padding: 0 16px; position: relative; }
+    .navbar {
+        padding: 0 16px;
+    }
 
     .nav-container {
         flex-wrap: wrap;
+        position: relative;
     }
 
     .nav-links {
         display: none;
         flex-direction: column;
         width: 100%;
-        padding: 12px 0 16px;
-        gap: 6px;
+        padding: 8px 0 12px;
+        gap: 4px;
         background: var(--cream);
         order: 3;
     }
-    .nav-links.open { display: flex; }
+    .nav-links.open {
+        display: flex;
+    }
 
     .nav-link {
-        padding: 10px 16px;
+        padding: 12px 16px;
         font-size: 13px;
         width: 100%;
         text-align: center;
-        border-radius: 12px;
+        border-radius: 14px;
     }
+
+    .nav-link::after { display: none; }
 
     .nav-link:hover,
     .nav-link.active {
         background: var(--beige-light);
+        color: var(--red);
     }
 
-    .section   { padding: 50px 16px; }
+    /* -- Sections -- */
+    .section {
+        padding: 48px 16px;
+        min-height: auto;
+    }
+    .section-hero {
+        min-height: calc(100vh - var(--navbar-height));
+    }
 
-    .five-col, .four-col { grid-template-columns: repeat(2, 1fr); }
-    .three-col { grid-template-columns: repeat(2, 1fr); }
-    .two-col   { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
-
+    /* -- Grids -- */
+    .five-col { grid-template-columns: repeat(3, 1fr); }
+    .four-col { grid-template-columns: repeat(2, 1fr); }
+    .three-col { grid-template-columns: repeat(3, 1fr); }
+    .two-col { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
     .card-row { gap: 16px; }
 
-    .btn-page  { width: 100%; max-width: 300px; }
-    .tab-btn   { width: 140px; font-size: 11px; padding: 12px 0; }
-    .tab-bar   { gap: 8px; margin-bottom: 24px; }
+    /* -- Tabs -- */
+    .tab-btn { width: 140px; font-size: 11px; padding: 12px 0; }
+    .tab-bar { gap: 8px; margin-bottom: 24px; }
 
-    .snaps-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .map-container { height: 350px; border-radius: 14px; }
-
+    /* -- Urban Relics -- */
     .urban-relics-layout {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
         gap: 20px;
     }
     .urban-relics-sidebar {
@@ -850,126 +867,192 @@ body {
         flex-wrap: wrap;
         gap: 8px;
     }
-    .tab-btn-side { width: 140px; font-size: 11px; padding: 12px 0; }
+    .tab-btn-side { width: auto; min-width: 120px; padding: 12px 20px; font-size: 11px; }
 
+    /* -- Pulse Events -- */
     .event-layout { flex-direction: column; gap: 20px; }
-    .event-left { flex: none; width: 100%; }
+    .event-left { flex: none; width: 100%; max-width: 400px; }
     .event-image { aspect-ratio: 4/3; }
-    .event-desc { font-size: 13px; }
+    .event-desc { font-size: 13px; line-height: 1.7; }
+    .event-right { padding-top: 0; }
 
-    .carousel-card { flex: 0 0 155px; }
-    .carousel-track { gap: 14px; padding: 8px 4px 16px; }
+    /* -- Carousels -- */
+    .carousel-card { flex: 0 0 150px; }
+    .carousel-track { gap: 12px; padding: 8px 4px 16px; }
 
-    .form-container { max-width: 100%; }
-    .form-input { padding: 14px 20px; font-size: 12px; }
+    /* -- Snaps -- */
+    .snaps-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    /* -- Map -- */
+    .map-container { height: 350px; border-radius: 14px; }
+
+    /* -- Forms -- */
+    .form-container { max-width: 100%; padding: 0 8px; }
+    .form-input { padding: 14px 20px; font-size: 12.5px; }
+
+    /* -- Buttons -- */
+    .btn-page { width: 100%; max-width: 320px; }
     .btn-submit { padding: 13px 36px; }
     .btn-hop { padding: 13px 32px; }
 
+    /* -- Modal -- */
     .modal { padding: 28px 24px; max-width: 340px; }
 
+    /* -- Misc -- */
     .page-title { font-size: 16px; margin-bottom: 24px; }
-
-    .spot-label { font-size: 10.5px; padding: 8px 12px; margin-top: 8px; }
+    .spot-label { font-size: 10.5px; padding: 8px 14px; margin-top: 10px; }
 }
 
-/* Mobile phones */
+/* Mobile phones (iPhone, Samsung Galaxy, Pixel etc) */
 @media (max-width: 480px) {
+    /* -- Navbar -- */
     .navbar { padding: 0 12px; }
-    .logo-img { height: 32px; }
+    .logo-img { height: 30px; }
     .logo { margin-right: 0; }
+    .hamburger { padding: 8px; }
+    .hamburger span { width: 22px; }
 
-    .section { padding: 40px 14px; min-height: auto; }
-    .section-hero { min-height: calc(100vh - var(--navbar-height)); }
+    .nav-link {
+        padding: 11px 14px;
+        font-size: 12.5px;
+    }
 
-    .five-col, .four-col { grid-template-columns: repeat(2, 1fr); }
+    /* -- Sections -- */
+    .section {
+        padding: 36px 14px;
+        min-height: auto;
+    }
+    .section-hero {
+        min-height: calc(100vh - var(--navbar-height));
+    }
+
+    /* -- Grids: 2 columns on phones -- */
+    .five-col { grid-template-columns: repeat(2, 1fr); }
+    .four-col { grid-template-columns: repeat(2, 1fr); }
     .three-col { grid-template-columns: repeat(2, 1fr); }
     .two-col { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+    .card-row { gap: 10px; }
 
-    .card-row { gap: 12px; }
+    /* -- Tabs -- */
+    .tab-btn { width: auto; min-width: 100px; padding: 11px 16px; font-size: 10.5px; }
+    .tab-bar { gap: 6px; margin-bottom: 20px; }
 
-    .btn-page { width: 100%; max-width: 260px; font-size: 12px; padding: 14px 0; }
-    .tab-btn { width: 110px; font-size: 10px; padding: 11px 0; }
-    .tab-btn-side { width: 110px; font-size: 10px; padding: 11px 0; }
-    .tab-bar { gap: 6px; }
+    /* -- Urban Relics sidebar -- */
+    .tab-btn-side { width: auto; min-width: 90px; padding: 10px 14px; font-size: 10.5px; }
+    .urban-relics-sidebar { gap: 6px; }
 
+    /* -- Carousels -- */
     .carousel-card { flex: 0 0 130px; }
-    .carousel-track { gap: 10px; }
+    .carousel-track { gap: 10px; padding: 6px 2px 14px; }
     .carousel-label { font-size: 10px; margin-top: 6px; }
+    .carousel-title { font-size: 14px; margin-bottom: 16px; }
 
-    .snaps-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .snap-overlay { padding: 12px; }
+    /* -- Pulse Events -- */
+    .event-left { max-width: 100%; }
+    .event-image { aspect-ratio: 3/2; }
+    .event-title { font-size: 14px; margin-bottom: 10px; }
+    .event-desc { font-size: 12.5px; line-height: 1.65; }
+    .event-layout { gap: 16px; }
+    .btn-back { font-size: 12px; margin-bottom: 10px; }
+
+    /* -- Snaps -- */
+    .snaps-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .snap-overlay { padding: 10px; }
     .snap-location { font-size: 9px; }
-    .snap-caption { font-size: 12px; }
-    .snap-add-icon { font-size: 32px; }
+    .snap-caption { font-size: 11px; }
+    .snap-add-icon { font-size: 30px; }
     .snap-add-text { font-size: 9px; }
 
-    .map-container { height: 300px; border-radius: 12px; }
+    /* -- Map -- */
+    .map-container { height: 280px; border-radius: 12px; }
 
-    .form-input { padding: 13px 18px; font-size: 11.5px; margin-bottom: 8px; }
-    .form-textarea { min-height: 90px; }
-    .btn-submit { padding: 12px 30px; font-size: 12px; }
-    .btn-hop { padding: 12px 28px; font-size: 12px; }
+    /* -- Forms -- */
+    .form-container { padding: 0 4px; }
+    .form-input { padding: 13px 16px; font-size: 11.5px; margin-bottom: 8px; border-radius: 24px; }
+    .form-textarea { min-height: 80px; border-radius: 16px; }
+    .form-select { background-position: right 14px center; padding-right: 36px; }
 
-    .interests-header { padding: 14px 18px; font-size: 12px; }
-    .interest-label { padding: 13px 18px; font-size: 11.5px; }
+    /* -- Buttons -- */
+    .btn-page { width: 100%; max-width: 280px; font-size: 12px; padding: 14px 0; }
+    .btn-submit { padding: 12px 28px; font-size: 12px; }
+    .btn-hop { padding: 12px 24px; font-size: 12px; }
 
-    .event-title { font-size: 14px; }
-    .event-desc { font-size: 12.5px; line-height: 1.65; }
-    .btn-back { font-size: 12px; }
+    /* -- Interests -- */
+    .interests-header { padding: 14px 16px; font-size: 12px; border-radius: 24px; }
+    .interest-label { padding: 12px 16px; font-size: 11.5px; border-radius: 24px; }
+    .interest-option { margin-bottom: 6px; }
 
-    .page-title { font-size: 15px; margin-bottom: 20px; }
-    .spot-label { font-size: 10px; padding: 7px 10px; margin-top: 6px; }
+    /* -- Page -- */
+    .page-title { font-size: 15px; margin-bottom: 18px; }
+    .spot-label { font-size: 9.5px; padding: 7px 8px; margin-top: 6px; border-radius: 20px; }
 
-    .modal { padding: 24px 20px; }
+    /* -- Modal -- */
+    .modal { padding: 24px 20px; max-width: 300px; }
     .modal-title { font-size: 22px; }
     .modal-text { font-size: 12px; }
 }
 
-/* Very small phones (iPhone SE, etc) */
+/* Very small phones (iPhone SE, Galaxy A series, 320-360px) */
 @media (max-width: 360px) {
-    .section { padding: 32px 10px; }
-    .five-col, .four-col, .three-col { grid-template-columns: 1fr; max-width: 220px; margin: 0 auto; }
-    .two-col { grid-template-columns: 1fr; max-width: 220px; margin: 0 auto; }
-    .tab-btn { width: 100px; font-size: 9.5px; }
-    .tab-btn-side { width: 100px; font-size: 9.5px; }
-    .carousel-card { flex: 0 0 120px; }
-    .snaps-grid { grid-template-columns: 1fr; max-width: 220px; margin: 0 auto; }
+    .navbar { padding: 0 8px; }
+    .section { padding: 28px 10px; }
+
+    .five-col, .four-col, .three-col, .two-col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .card-row { gap: 8px; }
+
+    .tab-btn { min-width: 85px; padding: 10px 10px; font-size: 9.5px; }
+    .tab-btn-side { min-width: 80px; padding: 9px 10px; font-size: 9.5px; }
+
+    .carousel-card { flex: 0 0 110px; }
+
+    .snaps-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+
+    .btn-page { max-width: 240px; font-size: 11px; padding: 12px 0; }
+
+    .form-input { padding: 12px 14px; font-size: 11px; }
+    .spot-label { font-size: 8.5px; padding: 6px 6px; }
+    .page-title { font-size: 14px; }
 }
 
-/* iOS safe areas (notch, home indicator) */
+/* iOS safe areas (notch, home indicator, Dynamic Island) */
 @supports (padding: env(safe-area-inset-bottom)) {
     .navbar {
-        padding-left: max(16px, env(safe-area-inset-left));
-        padding-right: max(16px, env(safe-area-inset-right));
-    }
-    .section {
-        padding-left: max(14px, env(safe-area-inset-left));
-        padding-right: max(14px, env(safe-area-inset-right));
+        padding-top: env(safe-area-inset-top);
     }
     body {
         padding-bottom: env(safe-area-inset-bottom);
     }
 }
 
-/* Touch device optimizations */
+/* Touch device optimizations (phones + tablets) */
 @media (hover: none) and (pointer: coarse) {
     .spot-card:hover { transform: none; }
     .snap-item:hover { transform: none; }
     .carousel-card:hover { transform: none; }
-    .btn-page:hover { transform: none; box-shadow: none; }
-    .btn-submit:hover { transform: none; box-shadow: none; }
-    .btn-hop:hover { transform: none; box-shadow: none; }
+    .btn-page:hover { transform: none; box-shadow: none; background: var(--beige); }
+    .btn-submit:hover { transform: none; box-shadow: none; background: var(--beige); }
+    .btn-hop:hover { transform: none; box-shadow: none; background: var(--beige); }
+    .nav-link:hover { background: none; }
+    .tab-btn:hover { background: var(--beige); }
+    .tab-btn-side:hover { background: var(--beige); }
+    .interest-label:hover { background: var(--beige); }
 
     .spot-card:active { transform: scale(0.97); }
     .snap-item:active { transform: scale(0.97); }
-    .btn-page:active { transform: scale(0.97); }
-    .btn-submit:active { transform: scale(0.97); }
-    .btn-hop:active { transform: scale(0.97); }
+    .btn-page:active { transform: scale(0.96); background: var(--beige-light); }
+    .btn-submit:active { transform: scale(0.96); background: var(--beige-light); }
+    .btn-hop:active { transform: scale(0.96); background: var(--beige-light); }
+    .tab-btn:active { transform: scale(0.96); }
+    .tab-btn-side:active { transform: scale(0.96); }
 
     .carousel-track {
         -webkit-overflow-scrolling: touch;
         scroll-behavior: smooth;
+        scrollbar-width: none;
     }
+    .carousel-track::-webkit-scrollbar { display: none; }
 }
 
 /* ===== SCROLLBAR ===== */
