@@ -408,6 +408,24 @@ body {
     opacity: 0.85;
 }
 
+.bars-card-img {
+    aspect-ratio: 200 / 260;
+    border-radius: 10px;
+    width: 100%;
+    overflow: hidden;
+    background: #d6d2c4;
+}
+
+.bars-card-img::after {
+    display: none;
+}
+
+.bars-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 .spot-label {
     display: block;
     text-align: center;
