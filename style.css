@@ -374,7 +374,7 @@ body {
 }
 
 .spot-card:hover {
-    transform: translateY(-6px);
+    transform: scale(1.05);
 }
 
 .spot-image {
@@ -1040,7 +1040,7 @@ body {
     .tab-btn-side:hover { background: var(--beige); }
     .interest-label:hover { background: var(--beige); }
 
-    .spot-card:active { transform: scale(0.97); }
+    .spot-card:active { transform: scale(1.05); }
     .snap-item:active { transform: scale(0.97); }
     .btn-page:active { transform: scale(0.96); background: var(--beige-light); }
     .btn-submit:active { transform: scale(0.96); background: var(--beige-light); }
