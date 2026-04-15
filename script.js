@@ -279,13 +279,8 @@ function initSplashCursor() {
     const canvas = document.getElementById('splash-cursor');
     if (!canvas) return;
 
-    // Skip on touch-only devices (no fine pointer) or when motion is reduced.
-    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
-    const reducedMotion  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!hasFinePointer || reducedMotion) {
-        canvas.style.display = 'none';
-        return;
-    }
+    // Splash works on every input type — mouse, pen, and touch (iPad,
+    // iPhone, Android, touch-screen Mac). No accessibility/touch guards.
 
     const ctx = canvas.getContext('2d');
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -321,7 +316,6 @@ function initSplashCursor() {
     }
 
     window.addEventListener('pointermove', (e) => {
-        if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
         const now = performance.now();
         if (!hasLast) { lastX = e.clientX; lastY = e.clientY; hasLast = true; }
         const dx = e.clientX - lastX;
@@ -348,7 +342,6 @@ function initSplashCursor() {
     }, { passive: true });
 
     window.addEventListener('pointerdown', (e) => {
-        if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
         const burst = 22;
         for (let i = 0; i < burst; i++) {
             const angle = (i / burst) * Math.PI * 2 + Math.random() * 0.3;

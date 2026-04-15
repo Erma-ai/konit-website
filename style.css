@@ -23,9 +23,6 @@
     backface-visibility: hidden;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    #splash-cursor { display: none; }
-}
 
 :root {
     --gold: #E5A100;
