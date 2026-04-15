@@ -126,6 +126,9 @@ const PRODUCTS = {
     'sticker-3': { name: 'GIRL POWER PACK',    price: 8,  img: 'assets/stickers-girlpower.jpg',category: 'stickers',desc: 'Bold expression pack \u2014 DJ LULE, GIRL POWER, LLAFE PA FUND, HAP PAS HAPI, warrior yoga. 8 kiss-cut vinyl stickers, weatherproof.' },
     'phonecase-1': { name: 'K\u00D2NIT GREEN', price: 18, img: 'assets/phonecase-konit.jpg', category: 'phonecases', desc: 'Forest green silicone phone case with the red \u00D2 logo and K\u00D2NIT wordmark. Soft-touch matte finish, precise camera cutouts, shock-absorbing edges. Bold Tirana flair in your pocket.' },
     'phonecase-2': { name: 'TRAFFIC CONES',    price: 18, img: 'assets/phonecase-cones.jpg', category: 'phonecases', desc: 'Sky-blue tough case with an all-over traffic-cone pattern in red, yellow, and black \u2014 a playful nod to the streets of Tirana. Dual-layer protection, raised bezels, MagSafe-friendly.' },
+    'keychain-1': { name: 'TIRONA',       price: 10, img: 'assets/keychain-tirona.jpg', category: 'keychains', desc: 'Acrylic Tirona keychain \u2014 "Hart\u00EB Eksperiencash". Sun, mosque, and the city skyline in bold flat colors, paired with a silver split ring and turquoise-and-yellow bead charms. Glossy print, lightweight, instantly recognizable.' },
+    'keychain-2': { name: 'TRAFFIC CONE', price: 8,  img: 'assets/keychain-cone.jpg',   category: 'keychains', desc: 'Glossy red-and-white traffic-cone keychain \u2014 the unofficial K\u00D2NIT mascot. Die-cut acrylic, raised gloss finish, polished metal split ring. Small but loud.' },
+    'keychain-3': { name: 'YOGA DUO',     price: 14, img: 'assets/keychain-yoga.jpg',   category: 'keychains', desc: 'Pair of soft-rubber yoga keychains \u2014 the Tree-Pose man (green ball chain) and the Side-Bend woman (yellow ball chain). Sold as a duo, designed for two friends who flow K\u00D2NIT.' },
     'notebook-1': { name: 'TIRONA',            price: 15, img: 'assets/notebook-tirona.jpg', category: 'notebooks', desc: 'Hardcover Tirona notebook with the "Hart\u00EB Eksperiencash" cover illustration. 120 dotted pages, elastic closure, ribbon bookmark \u2014 for journaling the city.' },
     'notebook-2': { name: 'K\u00D2NIT PATTERN',price: 14, img: 'assets/notebook-pattern.jpg',category: 'notebooks', desc: 'Softcover notebook with a black-and-white K\u00D2NIT sleeve over the houses-pattern cover. 96 lined pages, lay-flat binding, carry-anywhere size.' },
     'notebook-3': { name: 'K\u00D2NIT VIBES',  price: 18, img: 'assets/notebook-vibes.jpg',  category: 'notebooks', desc: 'Premium orange hardcover with the \u00D2 logo and K\u00D2NIT VIBES wordmark. 180 blank pages, cloth-bound spine, heavyweight paper \u2014 made to last.' },
@@ -136,7 +139,7 @@ const PRODUCTS = {
 // Maps a product category to the Urban Relics side-tab it lives under.
 const CATEGORY_ROOT = {
     tshirts: 'fits', totes: 'fits', socks: 'fits', hats: 'fits',
-    stickers: 'gear', phonecases: 'gear',
+    stickers: 'gear', phonecases: 'gear', keychains: 'gear',
     notebooks: 'creative', pencilcases: 'creative'
 };
 
@@ -167,7 +170,7 @@ function openProduct(productId) {
     if (sizeGroup) sizeGroup.style.display = (lastProductCategory === 'tshirts') ? 'flex' : 'none';
 
     // Hide every category sub-panel across both roots, then show the shared detail view.
-    ['fits-tshirts','fits-totes','fits-socks','fits-hats','gear-stickers','gear-phonecases','creative-notebooks','creative-pencilcases'].forEach(id => {
+    ['fits-tshirts','fits-totes','fits-socks','fits-hats','gear-stickers','gear-phonecases','gear-keychains','creative-notebooks','creative-pencilcases'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
     });

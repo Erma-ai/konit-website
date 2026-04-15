@@ -431,7 +431,7 @@
                             <div class="carousel-track">
                                 <div class="carousel-card" onclick="openGearCategory('stickers')"><div class="carousel-img" style="background-image:url('assets/stickers-llafe.jpg');"></div><span class="carousel-label">STICKERS</span></div>
                                 <div class="carousel-card" onclick="openGearCategory('phonecases')"><div class="carousel-img" style="background-image:url('assets/phonecase-konit.jpg'); background-size:cover; background-position:center;"></div><span class="carousel-label">PHONE CASES</span></div>
-                                <div class="carousel-card coming-soon" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">KEYCHAINS</span></div>
+                                <div class="carousel-card" onclick="openGearCategory('keychains')"><div class="carousel-img" style="background-image:url('assets/keychain-tirona.jpg'); background-size:cover; background-position:center;"></div><span class="carousel-label">KEYCHAINS</span></div>
                             </div>
                         </div>
 
@@ -472,6 +472,29 @@
                                     <div class="product-img" style="background-image:url('assets/phonecase-cones.jpg'); background-size:cover; background-position:center;"></div>
                                     <span class="product-name">TRAFFIC CONES</span>
                                     <span class="product-price">€18</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Keychains product carousel -->
+                        <div class="fits-products" id="gear-keychains" style="display:none;">
+                            <button class="btn-back" onclick="closeGearCategory('keychains')">&larr; BACK</button>
+                            <h3 class="products-title">KEYCHAINS</h3>
+                            <div class="carousel-track">
+                                <div class="product-card" onclick="openProduct('keychain-1')">
+                                    <div class="product-img" style="background-image:url('assets/keychain-tirona.jpg'); background-size:cover; background-position:center;"></div>
+                                    <span class="product-name">TIRONA</span>
+                                    <span class="product-price">€10</span>
+                                </div>
+                                <div class="product-card" onclick="openProduct('keychain-2')">
+                                    <div class="product-img" style="background-image:url('assets/keychain-cone.jpg'); background-size:contain; background-position:center; background-repeat:no-repeat; background-color:#ffffff;"></div>
+                                    <span class="product-name">TRAFFIC CONE</span>
+                                    <span class="product-price">€8</span>
+                                </div>
+                                <div class="product-card" onclick="openProduct('keychain-3')">
+                                    <div class="product-img" style="background-image:url('assets/keychain-yoga.jpg'); background-size:cover; background-position:center;"></div>
+                                    <span class="product-name">YOGA DUO</span>
+                                    <span class="product-price">€14</span>
                                 </div>
                             </div>
                         </div>
