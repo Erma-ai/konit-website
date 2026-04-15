@@ -197,12 +197,27 @@
 
             <!-- PULSE -->
             <div id="pulse-tab" class="tab-content">
-                <div class="card-row five-col pulse-icons" id="pulse-grid">
-                    <img class="pulse-icon-img" src="assets/pulse-music.svg" alt="MUSIC" onclick="openPulseEvent('music')">
-                    <img class="pulse-icon-img" src="assets/pulse-art.svg" alt="ART" onclick="openPulseEvent('art')">
-                    <img class="pulse-icon-img" src="assets/pulse-sport.svg" alt="SPORT" onclick="openPulseEvent('sport')">
-                    <img class="pulse-icon-img" src="assets/pulse-culinary.svg" alt="CULINARY" onclick="openPulseEvent('culinary')">
-                    <img class="pulse-icon-img" src="assets/pulse-hidden-gems.svg" alt="HIDDEN GEMS" onclick="openPulseEvent('hidden-gems')">
+                <div class="card-row five-col" id="pulse-grid">
+                    <div class="spot-card" onclick="openPulseEvent('music')">
+                        <div class="spot-image" style="background-image:url('assets/pulse-music.svg'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#e0dbc1;"></div>
+                        <span class="spot-label">MUSIC</span>
+                    </div>
+                    <div class="spot-card" onclick="openPulseEvent('art')">
+                        <div class="spot-image" style="background-image:url('assets/pulse-art.svg'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#e0dbc1;"></div>
+                        <span class="spot-label">ART</span>
+                    </div>
+                    <div class="spot-card" onclick="openPulseEvent('sport')">
+                        <div class="spot-image" style="background-image:url('assets/pulse-sport.svg'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#e0dbc1;"></div>
+                        <span class="spot-label">SPORT</span>
+                    </div>
+                    <div class="spot-card" onclick="openPulseEvent('culinary')">
+                        <div class="spot-image" style="background-image:url('assets/pulse-culinary.svg'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#e0dbc1;"></div>
+                        <span class="spot-label">CULINARY</span>
+                    </div>
+                    <div class="spot-card" onclick="openPulseEvent('hidden-gems')">
+                        <div class="spot-image" style="background-image:url('assets/pulse-hidden-gems.svg'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#e0dbc1;"></div>
+                        <span class="spot-label">HIDDEN GEMS</span>
+                    </div>
                 </div>
 
                 <!-- Pulse Event Views -->
