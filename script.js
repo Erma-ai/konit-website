@@ -234,14 +234,44 @@ function closePulseEvent(category) {
 }
 
 // ===== TIRANA MAP =====
-// Map is now a static designer SVG (assets/tirana-map.svg) embedded directly
-// in index.html — no JS init needed. Leaflet was removed in favour of the
-// hand-drawn emerald aesthetic with baked-in markers and labels.
+// The map itself is a static designer SVG (assets/tirana-map.svg). Pin
+// click-popups (name / date / description) are restored as DOM overlays
+// positioned in % coords on top of the SVG.
+function initMapPins() {
+    const container = document.getElementById('tirana-map-container');
+    if (!container) return;
+    const popup = container.querySelector('.map-popup');
+    if (!popup) return;
+
+    function showPopup(pin) {
+        popup.innerHTML =
+            '<button type="button" class="map-popup-close" aria-label="Close">\u00d7</button>' +
+            '<span class="map-popup-name">' + pin.dataset.name + '</span>' +
+            '<span class="map-popup-date">' + pin.dataset.date + '</span>' +
+            '<p class="map-popup-desc">' + pin.dataset.desc + '</p>';
+        popup.style.top  = pin.style.top;
+        popup.style.left = pin.style.left;
+        popup.hidden = false;
+        popup.querySelector('.map-popup-close').addEventListener('click', hidePopup);
+    }
+    function hidePopup() { popup.hidden = true; }
+
+    container.querySelectorAll('.map-pin').forEach(pin => {
+        pin.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showPopup(pin);
+        });
+    });
+    document.addEventListener('click', (e) => {
+        if (!container.contains(e.target)) hidePopup();
+    });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     initScrollReveals();
     initCarouselArrows();
     initSplashCursor();
+    initMapPins();
 });
 
 // ===== RAINBOW SPLASH CURSOR =====

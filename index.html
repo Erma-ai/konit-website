@@ -521,8 +521,17 @@
                 <button class="tab-btn" onclick="switchTab('snaps-tab', this)">SNAPS</button>
             </div>
             <div id="grid-tab" class="tab-content active">
-                <div class="map-container">
+                <div class="map-container" id="tirana-map-container">
                     <img src="assets/tirana-map.svg" alt="Hand-drawn emerald map of Tirana with landmarks" loading="lazy" class="map-image">
+                    <button class="map-pin" type="button" style="top:51%;left:45%" data-name="Blloku" data-date="March 2024" data-desc="The hippest neighborhood in Tirana — cafes, bars, galleries and vibrant nightlife."></button>
+                    <button class="map-pin" type="button" style="top:38%;left:50%" data-name="Liqeni i Thate" data-date="April 2024" data-desc="Beautiful artificial lake park — perfect for morning walks, yoga and sunset vibes."></button>
+                    <button class="map-pin" type="button" style="top:48%;left:48%" data-name="Pazari i Ri" data-date="February 2024" data-desc="The new bazaar — fresh produce, artisan crafts, street food and local character."></button>
+                    <button class="map-pin" type="button" style="top:55%;left:78%" data-name="Dajti" data-date="May 2024" data-desc="Mount Dajti — accessible by cable car. Hiking trails and panoramic city views."></button>
+                    <button class="map-pin" type="button" style="top:56%;left:38%" data-name="Tirana e Re" data-date="January 2024" data-desc="Modern Tirana with contemporary architecture and urban energy."></button>
+                    <button class="map-pin" type="button" style="top:51%;left:46%" data-name="Piramida" data-date="March 2024" data-desc="The iconic pyramid — reborn as a youth cultural center and creative hub."></button>
+                    <button class="map-pin" type="button" style="top:44%;left:56%" data-name="Komuna e Parisit" data-date="June 2024" data-desc="Artsy neighborhood with murals, galleries, and quirky cafes tucked in leafy streets."></button>
+                    <button class="map-pin" type="button" style="top:49%;left:47%" data-name="Sahati" data-date="December 2023" data-desc="The historic Clock Tower — the symbolic beating heart of old Tirana."></button>
+                    <div class="map-popup" id="map-popup" hidden></div>
                 </div>
             </div>
             <div id="snaps-tab" class="tab-content">
