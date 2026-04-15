@@ -14,6 +14,9 @@
     height: 100vh;
     pointer-events: none;
     z-index: 9999;
+    /* Soft transparency restores the airy watercolor feel without
+       triggering the scroll repaints that mix-blend-mode caused. */
+    opacity: 0.65;
     /* Promote to its own GPU layer so it never repaints on scroll. */
     transform: translateZ(0);
     will-change: transform;
