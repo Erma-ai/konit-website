@@ -1448,4 +1448,190 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--beige); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--brown); }
 
+/* ============================================================
+   UI/UX POLISH
+   ============================================================ */
+
+/* ---- Scroll progress bar (top of viewport, above navbar) ---- */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--red) 100%);
+    z-index: 10000;
+    transition: width 80ms linear;
+    pointer-events: none;
+}
+
+/* ---- Navbar scrolled state (blur + shadow after user scrolls) ---- */
+.navbar {
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, backdrop-filter 0.25s ease;
+}
+.navbar.scrolled {
+    background: rgba(242, 237, 232, 0.82);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* ---- Floating back-to-top button ---- */
+#back-to-top {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: none;
+    background: var(--brown);
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease, visibility 0s linear 0.25s;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    z-index: 9000;
+}
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease, visibility 0s linear 0s;
+}
+#back-to-top:hover {
+    background: var(--gold);
+    color: var(--brown);
+}
+@media (max-width: 768px) {
+    #back-to-top { right: 14px; bottom: 14px; width: 42px; height: 42px; }
+}
+
+/* ---- Toast notifications ---- */
+#toast-container {
+    position: fixed;
+    right: 22px;
+    bottom: 82px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9500;
+    pointer-events: none;
+}
+.toast {
+    min-width: 220px;
+    max-width: 320px;
+    padding: 12px 16px;
+    background: var(--brown);
+    color: var(--cream);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+    opacity: 0;
+    transform: translateX(20px);
+    animation: toastIn 0.25s ease forwards, toastOut 0.25s ease 2.5s forwards;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.toast::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+}
+.toast.success::before { background: var(--green); }
+.toast.error::before   { background: var(--red); }
+@keyframes toastIn {
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes toastOut {
+    to { opacity: 0; transform: translateX(20px); }
+}
+@media (max-width: 768px) {
+    #toast-container { right: 12px; left: 12px; bottom: 72px; align-items: flex-end; }
+    .toast { width: 100%; max-width: none; }
+}
+
+/* ---- COMING SOON label on unwired category cards ---- */
+.carousel-card.coming-soon {
+    position: relative;
+    cursor: default;
+}
+.carousel-card.coming-soon .carousel-img {
+    filter: grayscale(0.35) brightness(0.95);
+}
+.carousel-card.coming-soon::after {
+    content: 'COMING SOON';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 9px;
+    background: var(--brown);
+    color: var(--cream);
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+/* ---- Smooth fade-in for category/product panel switches ----
+   Runs each time display changes from none to block (only while
+   the element is actually rendered, so initial load for hidden
+   panels is unaffected). */
+.fits-products,
+.gear-main,
+.product-detail,
+#fits-main,
+.pulse-event {
+    animation: panelFadeIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes panelFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Accessible focus rings (keyboard only) ---- */
+a:focus-visible,
+button:focus-visible,
+.carousel-card:focus-visible,
+.product-card:focus-visible,
+.spot-card:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+/* Don't double-outline buttons that already have a rounded shape */
+.btn:focus-visible,
+.btn-back:focus-visible,
+.qty-btn:focus-visible,
+.size-btn:focus-visible {
+    outline-offset: 2px;
+}
+
+/* ---- Honor reduced motion for toasts/transitions ---- */
+@media (prefers-reduced-motion: reduce) {
+    .toast { animation: none; opacity: 1; transform: none; }
+    .fits-products, .gear-main, .product-detail, #fits-main, .pulse-event {
+        animation: none;
+    }
+    #back-to-top { transition: none; }
+    .navbar { transition: none; }
+}
+
 ::selection { background: var(--gold); color: var(--black); }

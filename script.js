@@ -181,11 +181,11 @@ function addToCart() {
     const p = PRODUCTS[currentProduct];
     const needsSize = (lastProductCategory === 'tshirts');
     if (needsSize && !currentSize) {
-        showModal('Pick a size', 'Please choose a size before adding to cart.');
+        showToast('Pick a size first', 'error');
         return;
     }
-    const sizeTxt = needsSize ? 'size ' + currentSize + ', ' : '';
-    showModal('Added to cart', p.name + ' (' + sizeTxt + 'qty ' + currentQty + ') has been added to your cart.');
+    const sizeTxt = needsSize ? ' (' + currentSize + ')' : '';
+    showToast('Added to cart \u2014 ' + p.name + sizeTxt + ' \u00D7' + currentQty, 'success');
 }
 
 function buyNow() {
@@ -426,3 +426,50 @@ document.addEventListener('click', function(e) {
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
 });
+
+// ============================================================
+// UI/UX POLISH
+// ============================================================
+
+// ----- Scroll progress + navbar scrolled state + back-to-top visibility -----
+(function initScrollUX() {
+    const progress = document.getElementById('scroll-progress');
+    const navbar = document.getElementById('main-nav');
+    const backToTop = document.getElementById('back-to-top');
+    let ticking = false;
+
+    function update() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        if (progress) progress.style.width = pct + '%';
+        if (navbar) navbar.classList.toggle('scrolled', scrollTop > 60);
+        if (backToTop) backToTop.classList.toggle('visible', scrollTop > 400);
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+        }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ----- Toast notifications -----
+function showToast(message, type) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast' + (type ? ' ' + type : '');
+    toast.textContent = message;
+    container.appendChild(toast);
+    // Remove after exit animation completes (2.5s delay + 0.25s animation).
+    setTimeout(() => toast.remove(), 2800);
+}

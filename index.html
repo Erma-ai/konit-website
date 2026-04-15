@@ -12,6 +12,9 @@
 </head>
 <body>
 
+    <!-- ===== SCROLL PROGRESS BAR ===== -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="main-nav">
         <div class="nav-container">
@@ -430,8 +433,8 @@
                         <div class="gear-main" id="gear-main">
                             <div class="carousel-track">
                                 <div class="carousel-card" onclick="openGearCategory('stickers')"><div class="carousel-img" style="background-image:url('assets/stickers-llafe.jpg');"></div><span class="carousel-label">STICKERS</span></div>
-                                <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">PHONE CASES</span></div>
-                                <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">KEYCHAINS</span></div>
+                                <div class="carousel-card coming-soon" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">PHONE CASES</span></div>
+                                <div class="carousel-card coming-soon" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">KEYCHAINS</span></div>
                             </div>
                         </div>
 
@@ -498,8 +501,8 @@
                     </div>
                     <div id="creative-tools-tab" class="tab-content">
                         <div class="carousel-track">
-                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">NOTEBOOKS</span></div>
-                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">PENCIL CASES</span></div>
+                            <div class="carousel-card coming-soon" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">NOTEBOOKS</span></div>
+                            <div class="carousel-card coming-soon" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">PENCIL CASES</span></div>
                         </div>
                     </div>
                 </div>
@@ -614,6 +617,16 @@
             <button class="btn btn-submit" onclick="closeModal()">OK</button>
         </div>
     </div>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button id="back-to-top" type="button" aria-label="Back to top" onclick="scrollToTop()">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path d="M12 5l-7 7h4v7h6v-7h4z" fill="currentColor"/>
+        </svg>
+    </button>
+
+    <!-- ===== TOAST CONTAINER ===== -->
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
