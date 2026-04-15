@@ -90,7 +90,11 @@ const PRODUCTS = {
     'tote-1':   { name: 'TIRONA',              price: 18, img: 'assets/tote-tirona.jpg',      category: 'totes',   desc: 'Canvas tote bag with the blue Tirona cityscape print \u2014 "Tirone lind, nuk bohesh". Sturdy cotton, long handles, everyday essential.' },
     'tote-2':   { name: 'K\u00D2NIT HOUSES',   price: 20, img: 'assets/tote-konit-houses.jpg', category: 'totes',   desc: 'Colorful houses pattern tote with the K\u00D2NIT wordmark. Heavyweight canvas, screen-printed design.' },
     'tote-3':   { name: 'GIRL POWER',          price: 22, img: 'assets/tote-girlpower.jpg',   category: 'totes',   desc: 'Statement tote \u2014 K\u00D2NIT Girl Power, Llafe pa fund. Bright yellow handles, cartoon illustration print. Loud and proud.' },
-    'tote-4':   { name: 'EDHE PAK...',         price: 20, img: 'assets/tote-edhepak.jpg',     category: 'totes',   desc: 'Cream canvas tote with the Edhe pak... coffee illustration. Perfect companion for caf\u00E9 mornings.' }
+    'tote-4':   { name: 'EDHE PAK...',         price: 20, img: 'assets/tote-edhepak.jpg',     category: 'totes',   desc: 'Cream canvas tote with the Edhe pak... coffee illustration. Perfect companion for caf\u00E9 mornings.' },
+    'sock-1':   { name: 'SKATE CREW',          price: 12, img: 'assets/sock-skate.jpg',       category: 'socks',   desc: 'White crew socks with a bold skate illustration. Cushioned cotton blend, made for all-day comfort.' },
+    'sock-2':   { name: 'K\u00D2NIT YELLOW',   price: 14, img: 'assets/sock-konit-yellow.jpg',category: 'socks',   desc: 'Yellow K\u00D2NIT logo socks. Ribbed cotton, bold black graphic, branded kraft wrap packaging.' },
+    'sock-3':   { name: 'MUSICIAN',            price: 15, img: 'assets/sock-musician.jpg',    category: 'socks',   desc: 'Long-cut socks with a hand-drawn musician design. Soft, stretchy, made for good vibes.' },
+    'sock-4':   { name: 'K\u00D2NIT TRIO PACK',price: 35, img: 'assets/sock-trio.jpg',        category: 'socks',   desc: 'Three-pair K\u00D2NIT sock set \u2014 red logo, musician, and character prints. Best value, best vibes.' }
 };
 
 let lastProductCategory = 'tshirts';
@@ -121,6 +125,7 @@ function openProduct(productId) {
 
     document.getElementById('fits-tshirts').style.display = 'none';
     document.getElementById('fits-totes').style.display = 'none';
+    document.getElementById('fits-socks').style.display = 'none';
     document.getElementById('product-detail').style.display = 'block';
 }
 
