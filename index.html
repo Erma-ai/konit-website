@@ -428,7 +428,7 @@
                         <div class="gear-main" id="gear-main">
                             <div class="carousel-track">
                                 <div class="carousel-card" onclick="openGearCategory('stickers')"><div class="carousel-img" style="background-image:url('assets/stickers-llafe.jpg');"></div><span class="carousel-label">STICKERS</span></div>
-                                <div class="carousel-card coming-soon" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">PHONE CASES</span></div>
+                                <div class="carousel-card" onclick="openGearCategory('phonecases')"><div class="carousel-img" style="background-image:url('assets/phonecase-konit.jpg'); background-size:cover; background-position:center;"></div><span class="carousel-label">PHONE CASES</span></div>
                                 <div class="carousel-card coming-soon" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">KEYCHAINS</span></div>
                             </div>
                         </div>
@@ -452,6 +452,24 @@
                                     <div class="product-img" style="background-image:url('assets/stickers-girlpower.jpg')"></div>
                                     <span class="product-name">GIRL POWER PACK</span>
                                     <span class="product-price">€8</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phone Cases product carousel -->
+                        <div class="fits-products" id="gear-phonecases" style="display:none;">
+                            <button class="btn-back" onclick="closeGearCategory('phonecases')">&larr; BACK</button>
+                            <h3 class="products-title">PHONE CASES</h3>
+                            <div class="carousel-track">
+                                <div class="product-card" onclick="openProduct('phonecase-1')">
+                                    <div class="product-img" style="background-image:url('assets/phonecase-konit.jpg'); background-size:cover; background-position:center;"></div>
+                                    <span class="product-name">KÒNIT GREEN</span>
+                                    <span class="product-price">€18</span>
+                                </div>
+                                <div class="product-card" onclick="openProduct('phonecase-2')">
+                                    <div class="product-img" style="background-image:url('assets/phonecase-cones.jpg'); background-size:cover; background-position:center;"></div>
+                                    <span class="product-name">TRAFFIC CONES</span>
+                                    <span class="product-price">€18</span>
                                 </div>
                             </div>
                         </div>
