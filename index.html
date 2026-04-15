@@ -500,9 +500,23 @@
                         </div>
                     </div>
                     <div id="creative-tools-tab" class="tab-content">
-                        <div class="carousel-track">
-                            <div class="carousel-card coming-soon" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">NOTEBOOKS</span></div>
-                            <div class="carousel-card coming-soon" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">PENCIL CASES</span></div>
+                        <!-- Main Creative Tools categories -->
+                        <div class="creative-main" id="creative-main">
+                            <div class="carousel-track">
+                                <div class="carousel-card" onclick="openCreativeCategory('notebooks')"><div class="carousel-img" style="background-image:url('assets/notebook-tirona.jpg');"></div><span class="carousel-label">NOTEBOOKS</span></div>
+                                <div class="carousel-card coming-soon" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">PENCIL CASES</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Notebooks product carousel -->
+                        <div class="creative-products" id="creative-notebooks" style="display:none;">
+                            <button class="btn-back" onclick="closeCreativeCategory('notebooks')">&larr; BACK</button>
+                            <h3 class="carousel-title">NOTEBOOKS</h3>
+                            <div class="carousel-track">
+                                <div class="carousel-card" onclick="openProduct('notebook-1')"><div class="carousel-img" style="background-image:url('assets/notebook-tirona.jpg');"></div><span class="carousel-label">TIRONA</span></div>
+                                <div class="carousel-card" onclick="openProduct('notebook-2')"><div class="carousel-img" style="background-image:url('assets/notebook-pattern.jpg');"></div><span class="carousel-label">KÒNIT PATTERN</span></div>
+                                <div class="carousel-card" onclick="openProduct('notebook-3')"><div class="carousel-img" style="background-image:url('assets/notebook-vibes.jpg');"></div><span class="carousel-label">KÒNIT VIBES</span></div>
+                            </div>
                         </div>
                     </div>
                 </div>

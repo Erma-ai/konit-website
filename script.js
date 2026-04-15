@@ -92,6 +92,17 @@ function closeGearCategory(category) {
     document.getElementById('gear-main').style.display = 'block';
 }
 
+// ===== URBAN RELICS: CREATIVE TOOLS CATEGORY VIEW =====
+function openCreativeCategory(category) {
+    document.getElementById('creative-main').style.display = 'none';
+    document.getElementById('creative-' + category).style.display = 'block';
+}
+
+function closeCreativeCategory(category) {
+    document.getElementById('creative-' + category).style.display = 'none';
+    document.getElementById('creative-main').style.display = 'block';
+}
+
 // ===== SHOP: PRODUCT DETAIL =====
 const PRODUCTS = {
     'tshirt-1': { name: 'TIRONA',              price: 35, img: 'assets/tshirt-tirona.jpg',    category: 'tshirts', desc: 'Premium white sweatshirt with the Tirona \u2014 hart\u00EB eksperjencash graphic. Soft cotton blend, cozy fit, made for every season in the city.' },
@@ -112,13 +123,17 @@ const PRODUCTS = {
     'hat-4':    { name: '\u00D2 LOGO',         price: 25, img: 'assets/hat-o-green.jpg',     category: 'hats',    desc: 'Forest green dad cap with the red \u00D2 patch \u2014 clean, bold, unmistakable. Washed cotton, vintage-feel brim.' },
     'sticker-1': { name: 'LLAFE PACK',         price: 8,  img: 'assets/stickers-llafe.jpg',  category: 'stickers', desc: 'Albanian slang sticker pack \u2014 "LLAFE S\u2019KA, EC K\u00D2NIT", "DY LBI K\u00D2NIT", "U HAP\u00CBT FARE", "ORA 00:00 K\u00D2NIT" and more. 8 kiss-cut vinyl stickers, weatherproof.' },
     'sticker-2': { name: 'VIBES PACK',         price: 8,  img: 'assets/stickers-vibes.jpg',  category: 'stickers', desc: 'Chill-mood sticker pack \u2014 coffee, music, yoga, art, groceries, and the K\u00D2NIT horseman. 8 kiss-cut vinyl stickers, weatherproof.' },
-    'sticker-3': { name: 'GIRL POWER PACK',    price: 8,  img: 'assets/stickers-girlpower.jpg',category: 'stickers',desc: 'Bold expression pack \u2014 DJ LULE, GIRL POWER, LLAFE PA FUND, HAP PAS HAPI, warrior yoga. 8 kiss-cut vinyl stickers, weatherproof.' }
+    'sticker-3': { name: 'GIRL POWER PACK',    price: 8,  img: 'assets/stickers-girlpower.jpg',category: 'stickers',desc: 'Bold expression pack \u2014 DJ LULE, GIRL POWER, LLAFE PA FUND, HAP PAS HAPI, warrior yoga. 8 kiss-cut vinyl stickers, weatherproof.' },
+    'notebook-1': { name: 'TIRONA',            price: 15, img: 'assets/notebook-tirona.jpg', category: 'notebooks', desc: 'Hardcover Tirona notebook with the "Hart\u00EB Eksperiencash" cover illustration. 120 dotted pages, elastic closure, ribbon bookmark \u2014 for journaling the city.' },
+    'notebook-2': { name: 'K\u00D2NIT PATTERN',price: 14, img: 'assets/notebook-pattern.jpg',category: 'notebooks', desc: 'Softcover notebook with a black-and-white K\u00D2NIT sleeve over the houses-pattern cover. 96 lined pages, lay-flat binding, carry-anywhere size.' },
+    'notebook-3': { name: 'K\u00D2NIT VIBES',  price: 18, img: 'assets/notebook-vibes.jpg',  category: 'notebooks', desc: 'Premium orange hardcover with the \u00D2 logo and K\u00D2NIT VIBES wordmark. 180 blank pages, cloth-bound spine, heavyweight paper \u2014 made to last.' }
 };
 
 // Maps a product category to the Urban Relics side-tab it lives under.
 const CATEGORY_ROOT = {
     tshirts: 'fits', totes: 'fits', socks: 'fits', hats: 'fits',
-    stickers: 'gear'
+    stickers: 'gear',
+    notebooks: 'creative'
 };
 
 let lastProductCategory = 'tshirts';
@@ -148,7 +163,7 @@ function openProduct(productId) {
     if (sizeGroup) sizeGroup.style.display = (lastProductCategory === 'tshirts') ? 'flex' : 'none';
 
     // Hide every category sub-panel across both roots, then show the shared detail view.
-    ['fits-tshirts','fits-totes','fits-socks','fits-hats','gear-stickers'].forEach(id => {
+    ['fits-tshirts','fits-totes','fits-socks','fits-hats','gear-stickers','creative-notebooks'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
     });
