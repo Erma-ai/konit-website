@@ -83,10 +83,10 @@ function closeFitsCategory(category) {
 
 // ===== SHOP: PRODUCT DETAIL =====
 const PRODUCTS = {
-    'tshirt-1': { name: 'TIRANA TEE',   price: 25, desc: 'Premium cotton tee with a screen-printed Tirana design. Soft, breathable, and made for the city.' },
-    'tshirt-2': { name: 'BLLOKU TEE',   price: 28, desc: 'Blloku-inspired graphic tee. Heavyweight cotton, printed in Tirana.' },
-    'tshirt-3': { name: 'PAZARI TEE',   price: 25, desc: 'Inspired by Pazari i Ri. Classic fit with artisan-style graphic print.' },
-    'tshirt-4': { name: 'PIRAMIDA TEE', price: 30, desc: 'Limited edition Piramida tribute tee. Oversized fit, premium fabric.' }
+    'tshirt-1': { name: 'TIRONA',         price: 35, img: 'assets/tshirt-tirona.jpg',  desc: 'Premium white sweatshirt with the Tirona \u2014 hart\u00EB eksperjencash graphic. Soft cotton blend, cozy fit, made for every season in the city.' },
+    'tshirt-2': { name: 'KONIT LOGO',     price: 28, img: 'assets/tshirt-konit.jpg',   desc: 'Oversized KONIT logo tee in black on white. Heavyweight cotton, screen-printed in Tirana. A bold statement piece.' },
+    'tshirt-3': { name: "HAJDE N'SOF\u00CBR", price: 30, img: 'assets/tshirt-hajde.jpg',   desc: 'Back-print tee celebrating the Albanian table. Relaxed oversized fit, 100% cotton, hand-illustrated design.' },
+    'tshirt-4': { name: 'EDHE PAK...',    price: 30, img: 'assets/tshirt-edhepak.jpg', desc: 'Albanian coffee culture tee. Oversized fit, cream cotton, green back-print design. For the ones who always stay for one more.' }
 };
 
 let currentProduct = null;
@@ -104,6 +104,9 @@ function openProduct(productId) {
     document.getElementById('product-detail-price').textContent = '\u20AC' + p.price;
     document.getElementById('product-detail-desc').textContent = p.desc;
     document.getElementById('product-qty').textContent = '1';
+    const imgEl = document.getElementById('product-detail-img');
+    imgEl.style.backgroundImage = 'url(\'' + p.img + '\')';
+    imgEl.classList.remove('placeholder-img');
     document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
 
     document.getElementById('fits-tshirts').style.display = 'none';
