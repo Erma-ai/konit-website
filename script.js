@@ -231,55 +231,70 @@ function closePulseEvent(category) {
 }
 
 // ===== TIRANA MAP =====
-let mapInstance = null;
+// Pin positions are percentages of the SVG canvas (3543\u00d71476). Adjust as needed.
+const MAP_PINS = [
+    { x: 30, y: 38, name: 'Blloku',           date: 'March 2024',    desc: 'The hippest neighborhood in Tirana \u2014 cafes, bars, galleries and vibrant nightlife.' },
+    { x: 22, y: 22, name: 'Liqeni i Thate',   date: 'April 2024',    desc: 'Beautiful artificial lake park \u2014 perfect for morning walks, yoga and sunset vibes.' },
+    { x: 42, y: 50, name: 'Pazari i Ri',      date: 'February 2024', desc: 'The new bazaar \u2014 fresh produce, artisan crafts, street food and local character.' },
+    { x: 78, y: 18, name: 'Dajti',            date: 'May 2024',      desc: 'Mount Dajti \u2014 accessible by cable car. Hiking trails and panoramic city views.' },
+    { x: 18, y: 70, name: 'Tirana e Re',      date: 'January 2024',  desc: 'Modern Tirana with contemporary architecture and urban energy.' },
+    { x: 38, y: 60, name: 'Piramida',         date: 'March 2024',    desc: 'The iconic pyramid \u2014 reborn as a youth cultural center and creative hub.' },
+    { x: 58, y: 72, name: 'Komuna e Parisit', date: 'June 2024',     desc: 'Artsy neighborhood with murals, galleries, and quirky cafes tucked in leafy streets.' },
+    { x: 50, y: 45, name: 'Sahati',           date: 'December 2023', desc: 'The historic Clock Tower \u2014 the symbolic beating heart of old Tirana.' }
+];
 
 function initMap() {
-    if (mapInstance) {
-        mapInstance.invalidateSize();
-        return;
-    }
+    const layer = document.getElementById('map-pins');
+    if (!layer || layer.dataset.ready === '1') return;
+    layer.dataset.ready = '1';
 
-    mapInstance = L.map('tirana-map', { zoomControl: true }).setView([41.3275, 19.8187], 13);
+    MAP_PINS.forEach((p, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'map-pin';
+        btn.style.left = p.x + '%';
+        btn.style.top  = p.y + '%';
+        btn.setAttribute('aria-label', p.name);
+        btn.dataset.idx = String(i);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(mapInstance);
+        const label = document.createElement('span');
+        label.className = 'map-pin-label';
+        label.textContent = p.name;
+        btn.appendChild(label);
 
-    const pins = [
-        { lat: 41.3255, lng: 19.8153, name: 'Blloku', date: 'March 2024', desc: 'The hippest neighborhood in Tirana \u2014 cafes, bars, galleries and vibrant nightlife.' },
-        { lat: 41.3360, lng: 19.8220, name: 'Liqeni i Thate', date: 'April 2024', desc: 'Beautiful artificial lake park \u2014 perfect for morning walks, yoga and sunset vibes.' },
-        { lat: 41.3295, lng: 19.8195, name: 'Pazari i Ri', date: 'February 2024', desc: 'The new bazaar \u2014 fresh produce, artisan crafts, street food and local character.' },
-        { lat: 41.3836, lng: 19.8583, name: 'Dajti', date: 'May 2024', desc: 'Mount Dajti \u2014 accessible by cable car. Hiking trails and panoramic city views.' },
-        { lat: 41.3200, lng: 19.8100, name: 'Tirana e Re', date: 'January 2024', desc: 'Modern Tirana with contemporary architecture and urban energy.' },
-        { lat: 41.3265, lng: 19.8172, name: 'Piramida', date: 'March 2024', desc: 'The iconic pyramid \u2014 reborn as a youth cultural center and creative hub.' },
-        { lat: 41.3310, lng: 19.8255, name: 'Komuna e Parisit', date: 'June 2024', desc: 'Artsy neighborhood with murals, galleries, and quirky cafes tucked in leafy streets.' },
-        { lat: 41.3288, lng: 19.8165, name: 'Sahati', date: 'December 2023', desc: 'The historic Clock Tower \u2014 the symbolic beating heart of old Tirana.' }
-    ];
-
-    const pinIcon = L.divIcon({
-        className: '',
-        html: '<div style="width:20px;height:28px;background:#E8524A;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.28);"></div>',
-        iconSize: [20, 28],
-        iconAnchor: [10, 28],
-        popupAnchor: [0, -32]
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openMapPopup(i);
+        });
+        layer.appendChild(btn);
     });
 
-    pins.forEach(p => {
-        L.marker([p.lat, p.lng], { icon: pinIcon })
-            .addTo(mapInstance)
-            .bindPopup(
-                '<div style="font-family:Inter,sans-serif;min-width:180px;padding:2px 0;">' +
-                '<strong style="font-size:14px;color:#3D2B1F;">' + p.name + '</strong><br>' +
-                '<span style="font-size:11px;color:#E5A100;font-weight:700;letter-spacing:0.5px;">' + p.date + '</span>' +
-                '<p style="font-size:12px;color:#3D2B1F;margin-top:6px;line-height:1.5;">' + p.desc + '</p>' +
-                '</div>',
-                { maxWidth: 220 }
-            );
+    // Click outside the popup closes it.
+    document.addEventListener('click', (e) => {
+        const popup = document.getElementById('map-popup');
+        if (!popup || popup.hidden) return;
+        if (popup.contains(e.target)) return;
+        if (e.target.closest('.map-pin')) return;
+        closeMapPopup();
     });
 }
 
+function openMapPopup(idx) {
+    const p = MAP_PINS[idx];
+    if (!p) return;
+    document.getElementById('map-popup-name').textContent = p.name;
+    document.getElementById('map-popup-date').textContent = p.date;
+    document.getElementById('map-popup-desc').textContent = p.desc;
+    document.getElementById('map-popup').hidden = false;
+}
+
+function closeMapPopup() {
+    const popup = document.getElementById('map-popup');
+    if (popup) popup.hidden = true;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(initMap, 200);
+    initMap();
     initScrollReveals();
     initCarouselArrows();
 });
