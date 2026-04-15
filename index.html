@@ -424,51 +424,76 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div id="urban-gear-tab" class="tab-content">
+                        <!-- Main Urban Gear categories -->
+                        <div class="gear-main" id="gear-main">
+                            <div class="carousel-track">
+                                <div class="carousel-card" onclick="openGearCategory('stickers')"><div class="carousel-img" style="background-image:url('assets/stickers-llafe.jpg');"></div><span class="carousel-label">STICKERS</span></div>
+                                <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">PHONE CASES</span></div>
+                                <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">KEYCHAINS</span></div>
+                            </div>
+                        </div>
 
-                        <!-- Product detail / buy view -->
-                        <div class="product-detail" id="product-detail" style="display:none;">
-                            <button class="btn-back" onclick="closeProduct()">&larr; BACK</button>
-                            <div class="product-detail-layout">
-                                <div class="product-detail-media">
-                                    <div class="product-detail-img placeholder-img" id="product-detail-img"></div>
+                        <!-- Stickers product carousel -->
+                        <div class="fits-products" id="gear-stickers" style="display:none;">
+                            <button class="btn-back" onclick="closeGearCategory('stickers')">&larr; BACK</button>
+                            <h3 class="products-title">STICKERS</h3>
+                            <div class="carousel-track">
+                                <div class="product-card" onclick="openProduct('sticker-1')">
+                                    <div class="product-img" style="background-image:url('assets/stickers-llafe.jpg')"></div>
+                                    <span class="product-name">LLAFE PACK</span>
+                                    <span class="product-price">€8</span>
                                 </div>
-                                <div class="product-detail-info">
-                                    <h3 class="product-detail-name" id="product-detail-name">TIRANA TEE</h3>
-                                    <div class="product-detail-price" id="product-detail-price">€25</div>
-                                    <p class="product-detail-desc" id="product-detail-desc">Premium cotton tee with a screen-printed Tirana design. Soft, breathable, and made for the city.</p>
-
-                                    <div class="option-group" id="size-group">
-                                        <label class="option-label">SIZE</label>
-                                        <div class="size-options">
-                                            <button type="button" class="size-btn" onclick="selectSize(this)">S</button>
-                                            <button type="button" class="size-btn" onclick="selectSize(this)">M</button>
-                                            <button type="button" class="size-btn" onclick="selectSize(this)">L</button>
-                                            <button type="button" class="size-btn" onclick="selectSize(this)">XL</button>
-                                        </div>
-                                    </div>
-
-                                    <div class="option-group">
-                                        <label class="option-label">QUANTITY</label>
-                                        <div class="qty-control">
-                                            <button type="button" class="qty-btn" onclick="changeQty(-1)">&minus;</button>
-                                            <span id="product-qty">1</span>
-                                            <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
-                                        </div>
-                                    </div>
-
-                                    <div class="product-actions">
-                                        <button type="button" class="btn btn-cart" onclick="addToCart()">ADD TO CART</button>
-                                        <button type="button" class="btn btn-buy" onclick="buyNow()">BUY NOW</button>
-                                    </div>
+                                <div class="product-card" onclick="openProduct('sticker-2')">
+                                    <div class="product-img" style="background-image:url('assets/stickers-vibes.jpg')"></div>
+                                    <span class="product-name">VIBES PACK</span>
+                                    <span class="product-price">€8</span>
+                                </div>
+                                <div class="product-card" onclick="openProduct('sticker-3')">
+                                    <div class="product-img" style="background-image:url('assets/stickers-girlpower.jpg')"></div>
+                                    <span class="product-name">GIRL POWER PACK</span>
+                                    <span class="product-price">€8</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="urban-gear-tab" class="tab-content">
-                        <div class="carousel-track">
-                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">STICKERS</span></div>
-                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">PHONE CASES</span></div>
-                            <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">KEYCHAINS</span></div>
+                    <!-- Shared product detail / buy view (works for Fits and Urban Gear) -->
+                    <div class="product-detail" id="product-detail" style="display:none;">
+                        <button class="btn-back" onclick="closeProduct()">&larr; BACK</button>
+                        <div class="product-detail-layout">
+                            <div class="product-detail-media">
+                                <div class="product-detail-img placeholder-img" id="product-detail-img"></div>
+                            </div>
+                            <div class="product-detail-info">
+                                <h3 class="product-detail-name" id="product-detail-name">TIRANA TEE</h3>
+                                <div class="product-detail-price" id="product-detail-price">€25</div>
+                                <p class="product-detail-desc" id="product-detail-desc">Premium cotton tee with a screen-printed Tirana design. Soft, breathable, and made for the city.</p>
+
+                                <div class="option-group" id="size-group">
+                                    <label class="option-label">SIZE</label>
+                                    <div class="size-options">
+                                        <button type="button" class="size-btn" onclick="selectSize(this)">S</button>
+                                        <button type="button" class="size-btn" onclick="selectSize(this)">M</button>
+                                        <button type="button" class="size-btn" onclick="selectSize(this)">L</button>
+                                        <button type="button" class="size-btn" onclick="selectSize(this)">XL</button>
+                                    </div>
+                                </div>
+
+                                <div class="option-group">
+                                    <label class="option-label">QUANTITY</label>
+                                    <div class="qty-control">
+                                        <button type="button" class="qty-btn" onclick="changeQty(-1)">&minus;</button>
+                                        <span id="product-qty">1</span>
+                                        <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="product-actions">
+                                    <button type="button" class="btn btn-cart" onclick="addToCart()">ADD TO CART</button>
+                                    <button type="button" class="btn btn-buy" onclick="buyNow()">BUY NOW</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="creative-tools-tab" class="tab-content">

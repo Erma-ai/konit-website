@@ -390,6 +390,12 @@ body {
     min-width: 0;
 }
 
+/* When a product detail is open, hide the category tabs so the shared
+   buy view (a sibling of .tab-content) stands alone. */
+.urban-relics-content.buying > .tab-content {
+    display: none !important;
+}
+
 /* ===== CARD ROWS ===== */
 .card-row {
     display: grid;

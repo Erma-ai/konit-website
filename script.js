@@ -81,6 +81,17 @@ function closeFitsCategory(category) {
     document.getElementById('fits-main').style.display = 'block';
 }
 
+// ===== URBAN RELICS: URBAN GEAR CATEGORY VIEW =====
+function openGearCategory(category) {
+    document.getElementById('gear-main').style.display = 'none';
+    document.getElementById('gear-' + category).style.display = 'block';
+}
+
+function closeGearCategory(category) {
+    document.getElementById('gear-' + category).style.display = 'none';
+    document.getElementById('gear-main').style.display = 'block';
+}
+
 // ===== SHOP: PRODUCT DETAIL =====
 const PRODUCTS = {
     'tshirt-1': { name: 'TIRONA',              price: 35, img: 'assets/tshirt-tirona.jpg',    category: 'tshirts', desc: 'Premium white sweatshirt with the Tirona \u2014 hart\u00EB eksperjencash graphic. Soft cotton blend, cozy fit, made for every season in the city.' },
@@ -98,7 +109,16 @@ const PRODUCTS = {
     'hat-1':    { name: 'TIRONA',              price: 30, img: 'assets/hat-tirona.jpg',      category: 'hats',    desc: 'Navy & cream two-tone snapback with the red Tirona tower and gold sun print. Structured crown, flat brim, adjustable back.' },
     'hat-2':    { name: 'K\u00D2NIT BLUE',     price: 25, img: 'assets/hat-konit-blue.jpg',  category: 'hats',    desc: 'Royal blue curved-brim cap with embroidered white K\u00D2NIT wordmark and logo. Classic six-panel fit, everyday staple.' },
     'hat-3':    { name: 'HAJDE NAMI',          price: 25, img: 'assets/hat-hajde.jpg',       category: 'hats',    desc: 'Washed blue dad cap with gold embroidery \u2014 "Hajde mo, me EC Konit bohet nami". Soft unstructured crown, curved brim.' },
-    'hat-4':    { name: '\u00D2 LOGO',         price: 25, img: 'assets/hat-o-green.jpg',     category: 'hats',    desc: 'Forest green dad cap with the red \u00D2 patch \u2014 clean, bold, unmistakable. Washed cotton, vintage-feel brim.' }
+    'hat-4':    { name: '\u00D2 LOGO',         price: 25, img: 'assets/hat-o-green.jpg',     category: 'hats',    desc: 'Forest green dad cap with the red \u00D2 patch \u2014 clean, bold, unmistakable. Washed cotton, vintage-feel brim.' },
+    'sticker-1': { name: 'LLAFE PACK',         price: 8,  img: 'assets/stickers-llafe.jpg',  category: 'stickers', desc: 'Albanian slang sticker pack \u2014 "LLAFE S\u2019KA, EC K\u00D2NIT", "DY LBI K\u00D2NIT", "U HAP\u00CBT FARE", "ORA 00:00 K\u00D2NIT" and more. 8 kiss-cut vinyl stickers, weatherproof.' },
+    'sticker-2': { name: 'VIBES PACK',         price: 8,  img: 'assets/stickers-vibes.jpg',  category: 'stickers', desc: 'Chill-mood sticker pack \u2014 coffee, music, yoga, art, groceries, and the K\u00D2NIT horseman. 8 kiss-cut vinyl stickers, weatherproof.' },
+    'sticker-3': { name: 'GIRL POWER PACK',    price: 8,  img: 'assets/stickers-girlpower.jpg',category: 'stickers',desc: 'Bold expression pack \u2014 DJ LULE, GIRL POWER, LLAFE PA FUND, HAP PAS HAPI, warrior yoga. 8 kiss-cut vinyl stickers, weatherproof.' }
+};
+
+// Maps a product category to the Urban Relics side-tab it lives under.
+const CATEGORY_ROOT = {
+    tshirts: 'fits', totes: 'fits', socks: 'fits', hats: 'fits',
+    stickers: 'gear'
 };
 
 let lastProductCategory = 'tshirts';
@@ -127,16 +147,23 @@ function openProduct(productId) {
     const sizeGroup = document.getElementById('size-group');
     if (sizeGroup) sizeGroup.style.display = (lastProductCategory === 'tshirts') ? 'flex' : 'none';
 
-    document.getElementById('fits-tshirts').style.display = 'none';
-    document.getElementById('fits-totes').style.display = 'none';
-    document.getElementById('fits-socks').style.display = 'none';
-    document.getElementById('fits-hats').style.display = 'none';
+    // Hide every category sub-panel across both roots, then show the shared detail view.
+    ['fits-tshirts','fits-totes','fits-socks','fits-hats','gear-stickers'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    });
+    // Hide the currently-active tab's content so the buy view stands alone.
+    document.querySelector('.urban-relics-content').classList.add('buying');
     document.getElementById('product-detail').style.display = 'block';
 }
 
 function closeProduct() {
     document.getElementById('product-detail').style.display = 'none';
-    document.getElementById('fits-' + lastProductCategory).style.display = 'block';
+    document.querySelector('.urban-relics-content').classList.remove('buying');
+    const root = CATEGORY_ROOT[lastProductCategory] || 'fits';
+    const panelId = root + '-' + lastProductCategory;
+    const panel = document.getElementById(panelId);
+    if (panel) panel.style.display = 'block';
 }
 
 function selectSize(btn) {
