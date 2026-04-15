@@ -126,14 +126,16 @@ const PRODUCTS = {
     'sticker-3': { name: 'GIRL POWER PACK',    price: 8,  img: 'assets/stickers-girlpower.jpg',category: 'stickers',desc: 'Bold expression pack \u2014 DJ LULE, GIRL POWER, LLAFE PA FUND, HAP PAS HAPI, warrior yoga. 8 kiss-cut vinyl stickers, weatherproof.' },
     'notebook-1': { name: 'TIRONA',            price: 15, img: 'assets/notebook-tirona.jpg', category: 'notebooks', desc: 'Hardcover Tirona notebook with the "Hart\u00EB Eksperiencash" cover illustration. 120 dotted pages, elastic closure, ribbon bookmark \u2014 for journaling the city.' },
     'notebook-2': { name: 'K\u00D2NIT PATTERN',price: 14, img: 'assets/notebook-pattern.jpg',category: 'notebooks', desc: 'Softcover notebook with a black-and-white K\u00D2NIT sleeve over the houses-pattern cover. 96 lined pages, lay-flat binding, carry-anywhere size.' },
-    'notebook-3': { name: 'K\u00D2NIT VIBES',  price: 18, img: 'assets/notebook-vibes.jpg',  category: 'notebooks', desc: 'Premium orange hardcover with the \u00D2 logo and K\u00D2NIT VIBES wordmark. 180 blank pages, cloth-bound spine, heavyweight paper \u2014 made to last.' }
+    'notebook-3': { name: 'K\u00D2NIT VIBES',  price: 18, img: 'assets/notebook-vibes.jpg',  category: 'notebooks', desc: 'Premium orange hardcover with the \u00D2 logo and K\u00D2NIT VIBES wordmark. 180 blank pages, cloth-bound spine, heavyweight paper \u2014 made to last.' },
+    'pencilcase-1': { name: '\u00D2 POUCH',          price: 16, img: 'assets/pencilcase-o.jpg',            category: 'pencilcases', desc: 'Yellow canvas tube pencil case with the \u00D2 logo and sticker-art prints \u2014 the dreamer, the yogi, the llafexhi girl. Zip closure, purple trim, holds pens, brushes, and everything in between.' },
+    'pencilcase-2': { name: 'K\u00D2NIT WRITING SET',price: 20, img: 'assets/pencilcase-writing-set.jpg', category: 'pencilcases', desc: 'K\u00D2NIT Writing Set \u2014 three premium click pens with matching prints (cherry, red-and-pink stripe, yellow polka dot), gold clips and tips. Gel-ink refill, 0.7 mm. Packaged ready to gift.' }
 };
 
 // Maps a product category to the Urban Relics side-tab it lives under.
 const CATEGORY_ROOT = {
     tshirts: 'fits', totes: 'fits', socks: 'fits', hats: 'fits',
     stickers: 'gear',
-    notebooks: 'creative'
+    notebooks: 'creative', pencilcases: 'creative'
 };
 
 let lastProductCategory = 'tshirts';
@@ -163,7 +165,7 @@ function openProduct(productId) {
     if (sizeGroup) sizeGroup.style.display = (lastProductCategory === 'tshirts') ? 'flex' : 'none';
 
     // Hide every category sub-panel across both roots, then show the shared detail view.
-    ['fits-tshirts','fits-totes','fits-socks','fits-hats','gear-stickers','creative-notebooks'].forEach(id => {
+    ['fits-tshirts','fits-totes','fits-socks','fits-hats','gear-stickers','creative-notebooks','creative-pencilcases'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
     });
