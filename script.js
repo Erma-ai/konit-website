@@ -70,6 +70,81 @@ function selectCarouselCard(card) {
     }
 }
 
+// ===== URBAN RELICS: FITS CATEGORY VIEW =====
+function openFitsCategory(category) {
+    document.getElementById('fits-main').style.display = 'none';
+    document.getElementById('fits-' + category).style.display = 'block';
+}
+
+function closeFitsCategory(category) {
+    document.getElementById('fits-' + category).style.display = 'none';
+    document.getElementById('fits-main').style.display = 'block';
+}
+
+// ===== SHOP: PRODUCT DETAIL =====
+const PRODUCTS = {
+    'tshirt-1': { name: 'TIRANA TEE',   price: 25, desc: 'Premium cotton tee with a screen-printed Tirana design. Soft, breathable, and made for the city.' },
+    'tshirt-2': { name: 'BLLOKU TEE',   price: 28, desc: 'Blloku-inspired graphic tee. Heavyweight cotton, printed in Tirana.' },
+    'tshirt-3': { name: 'PAZARI TEE',   price: 25, desc: 'Inspired by Pazari i Ri. Classic fit with artisan-style graphic print.' },
+    'tshirt-4': { name: 'PIRAMIDA TEE', price: 30, desc: 'Limited edition Piramida tribute tee. Oversized fit, premium fabric.' }
+};
+
+let currentProduct = null;
+let currentQty = 1;
+let currentSize = null;
+
+function openProduct(productId) {
+    const p = PRODUCTS[productId];
+    if (!p) return;
+    currentProduct = productId;
+    currentQty = 1;
+    currentSize = null;
+
+    document.getElementById('product-detail-name').textContent = p.name;
+    document.getElementById('product-detail-price').textContent = '\u20AC' + p.price;
+    document.getElementById('product-detail-desc').textContent = p.desc;
+    document.getElementById('product-qty').textContent = '1';
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+
+    document.getElementById('fits-tshirts').style.display = 'none';
+    document.getElementById('product-detail').style.display = 'block';
+}
+
+function closeProduct() {
+    document.getElementById('product-detail').style.display = 'none';
+    document.getElementById('fits-tshirts').style.display = 'block';
+}
+
+function selectSize(btn) {
+    btn.closest('.size-options').querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSize = btn.textContent.trim();
+}
+
+function changeQty(delta) {
+    currentQty = Math.max(1, currentQty + delta);
+    document.getElementById('product-qty').textContent = currentQty;
+}
+
+function addToCart() {
+    if (!currentSize) {
+        showModal('Pick a size', 'Please choose a size before adding to cart.');
+        return;
+    }
+    const p = PRODUCTS[currentProduct];
+    showModal('Added to cart', p.name + ' (size ' + currentSize + ', qty ' + currentQty + ') has been added to your cart.');
+}
+
+function buyNow() {
+    if (!currentSize) {
+        showModal('Pick a size', 'Please choose a size before checking out.');
+        return;
+    }
+    const p = PRODUCTS[currentProduct];
+    const total = (p.price * currentQty).toFixed(2);
+    showModal('Order placed!', p.name + ' x' + currentQty + ' (size ' + currentSize + ')\nTotal: \u20AC' + total + '\nCheck your email for confirmation.');
+}
+
 // ===== PULSE EVENT VIEWS =====
 function openPulseEvent(category) {
     document.getElementById('pulse-grid').style.display = 'none';
