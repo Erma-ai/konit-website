@@ -94,7 +94,11 @@ const PRODUCTS = {
     'sock-1':   { name: 'SKATE CREW',          price: 12, img: 'assets/sock-skate.jpg',       category: 'socks',   desc: 'White crew socks with a bold skate illustration. Cushioned cotton blend, made for all-day comfort.' },
     'sock-2':   { name: 'K\u00D2NIT YELLOW',   price: 14, img: 'assets/sock-konit-yellow.jpg',category: 'socks',   desc: 'Yellow K\u00D2NIT logo socks. Ribbed cotton, bold black graphic, branded kraft wrap packaging.' },
     'sock-3':   { name: 'MUSICIAN',            price: 15, img: 'assets/sock-musician.jpg',    category: 'socks',   desc: 'Long-cut socks with a hand-drawn musician design. Soft, stretchy, made for good vibes.' },
-    'sock-4':   { name: 'K\u00D2NIT TRIO PACK',price: 35, img: 'assets/sock-trio.jpg',        category: 'socks',   desc: 'Three-pair K\u00D2NIT sock set \u2014 red logo, musician, and character prints. Best value, best vibes.' }
+    'sock-4':   { name: 'K\u00D2NIT TRIO PACK',price: 35, img: 'assets/sock-trio.jpg',        category: 'socks',   desc: 'Three-pair K\u00D2NIT sock set \u2014 red logo, musician, and character prints. Best value, best vibes.' },
+    'hat-1':    { name: 'TIRONA',              price: 30, img: 'assets/hat-tirona.jpg',      category: 'hats',    desc: 'Navy & cream two-tone snapback with the red Tirona tower and gold sun print. Structured crown, flat brim, adjustable back.' },
+    'hat-2':    { name: 'K\u00D2NIT BLUE',     price: 25, img: 'assets/hat-konit-blue.jpg',  category: 'hats',    desc: 'Royal blue curved-brim cap with embroidered white K\u00D2NIT wordmark and logo. Classic six-panel fit, everyday staple.' },
+    'hat-3':    { name: 'HAJDE NAMI',          price: 25, img: 'assets/hat-hajde.jpg',       category: 'hats',    desc: 'Washed blue dad cap with gold embroidery \u2014 "Hajde mo, me EC Konit bohet nami". Soft unstructured crown, curved brim.' },
+    'hat-4':    { name: '\u00D2 LOGO',         price: 25, img: 'assets/hat-o-green.jpg',     category: 'hats',    desc: 'Forest green dad cap with the red \u00D2 patch \u2014 clean, bold, unmistakable. Washed cotton, vintage-feel brim.' }
 };
 
 let lastProductCategory = 'tshirts';
@@ -126,6 +130,7 @@ function openProduct(productId) {
     document.getElementById('fits-tshirts').style.display = 'none';
     document.getElementById('fits-totes').style.display = 'none';
     document.getElementById('fits-socks').style.display = 'none';
+    document.getElementById('fits-hats').style.display = 'none';
     document.getElementById('product-detail').style.display = 'block';
 }
 

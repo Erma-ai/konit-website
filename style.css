@@ -585,7 +585,12 @@ body {
 
 .carousel-img {
     width: 100%;
+    aspect-ratio: 200 / 260;
     border-radius: 12px;
+    background-color: #efeae0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     transition: box-shadow 0.35s ease, outline 0.35s ease;
 }
 
