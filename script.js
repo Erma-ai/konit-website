@@ -297,7 +297,129 @@ document.addEventListener('DOMContentLoaded', () => {
     initMap();
     initScrollReveals();
     initCarouselArrows();
+    initSplashCursor();
 });
+
+// ===== RAINBOW SPLASH CURSOR =====
+function initSplashCursor() {
+    const canvas = document.getElementById('splash-cursor');
+    if (!canvas) return;
+
+    // Skip on touch-only devices (no fine pointer) or when motion is reduced.
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    const reducedMotion  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!hasFinePointer || reducedMotion) {
+        canvas.style.display = 'none';
+        return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let w = 0, h = 0;
+
+    function resize() {
+        w = Math.floor(window.innerWidth  * dpr);
+        h = Math.floor(window.innerHeight * dpr);
+        canvas.width  = w;
+        canvas.height = h;
+        canvas.style.width  = window.innerWidth  + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const particles = [];
+    let hue = 0;
+    let lastX = 0, lastY = 0, hasLast = false;
+    let lastEmitTime = 0;
+
+    function spawn(cx, cy, vx, vy, sizeBase, life) {
+        particles.push({
+            x: cx * dpr,
+            y: cy * dpr,
+            vx: vx * dpr,
+            vy: vy * dpr,
+            life: 1,
+            decay: 1 / Math.max(20, life),
+            size: (sizeBase + Math.random() * sizeBase * 0.6) * dpr,
+            hue: (hue + Math.random() * 28) % 360
+        });
+    }
+
+    window.addEventListener('pointermove', (e) => {
+        if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
+        const now = performance.now();
+        if (!hasLast) { lastX = e.clientX; lastY = e.clientY; hasLast = true; }
+        const dx = e.clientX - lastX;
+        const dy = e.clientY - lastY;
+        const dist = Math.hypot(dx, dy);
+
+        if (now - lastEmitTime > 14 || dist > 6) {
+            const count = 1 + Math.min(2, Math.floor(dist / 14));
+            for (let i = 0; i < count; i++) {
+                spawn(
+                    e.clientX + (Math.random() - 0.5) * 4,
+                    e.clientY + (Math.random() - 0.5) * 4,
+                    -dx * 0.04 + (Math.random() - 0.5) * 1.4,
+                    -dy * 0.04 + (Math.random() - 0.5) * 1.4,
+                    14,
+                    55
+                );
+                hue = (hue + 7) % 360;
+            }
+            lastEmitTime = now;
+        }
+        lastX = e.clientX;
+        lastY = e.clientY;
+    }, { passive: true });
+
+    window.addEventListener('pointerdown', (e) => {
+        if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
+        const burst = 22;
+        for (let i = 0; i < burst; i++) {
+            const angle = (i / burst) * Math.PI * 2 + Math.random() * 0.3;
+            const speed = 2.5 + Math.random() * 4.5;
+            spawn(
+                e.clientX,
+                e.clientY,
+                Math.cos(angle) * speed,
+                Math.sin(angle) * speed,
+                22,
+                70
+            );
+            hue = (hue + 14) % 360;
+        }
+    }, { passive: true });
+
+    function frame() {
+        ctx.clearRect(0, 0, w, h);
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            p.x  += p.vx;
+            p.y  += p.vy;
+            p.vx *= 0.93;
+            p.vy *= 0.93;
+            p.life -= p.decay;
+
+            if (p.life <= 0) { particles.splice(i, 1); continue; }
+
+            const r = p.size * (0.85 + (1 - p.life) * 0.9);
+            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
+            const a = Math.min(1, p.life * 1.1) * 0.7;
+            grad.addColorStop(0,    `hsla(${p.hue}, 95%, 58%, ${a})`);
+            grad.addColorStop(0.55, `hsla(${p.hue}, 95%, 56%, ${a * 0.45})`);
+            grad.addColorStop(1,    `hsla(${p.hue}, 95%, 55%, 0)`);
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+}
 
 // ===== CAROUSEL SCROLL ARROWS =====
 function initCarouselArrows() {

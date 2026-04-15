@@ -5,6 +5,21 @@
     box-sizing: border-box;
 }
 
+/* ===== RAINBOW SPLASH CURSOR ===== */
+#splash-cursor {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #splash-cursor { display: none; }
+}
+
 :root {
     --gold: #E5A100;
     --gold-dark: #CC8E00;
