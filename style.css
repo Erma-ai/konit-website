@@ -1060,6 +1060,14 @@ body {
 }
 
 /* ===== TIRANA MAP ===== */
+.map-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 .map-container {
     width: 100%;
     height: 520px;
