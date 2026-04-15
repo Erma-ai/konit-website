@@ -229,7 +229,118 @@ function initMap() {
 
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(initMap, 200);
+    initScrollReveals();
+    initCarouselArrows();
 });
+
+// ===== CAROUSEL SCROLL ARROWS =====
+function initCarouselArrows() {
+    document.querySelectorAll('.carousel-track').forEach(track => {
+        // Wrap track in a positioning container
+        const wrap = document.createElement('div');
+        wrap.className = 'carousel-wrap';
+        track.parentNode.insertBefore(wrap, track);
+        wrap.appendChild(track);
+
+        const prev = document.createElement('button');
+        prev.className = 'carousel-arrow prev';
+        prev.type = 'button';
+        prev.setAttribute('aria-label', 'Scroll left');
+        prev.innerHTML = '&lsaquo;';
+
+        const next = document.createElement('button');
+        next.className = 'carousel-arrow next';
+        next.type = 'button';
+        next.setAttribute('aria-label', 'Scroll right');
+        next.innerHTML = '&rsaquo;';
+
+        wrap.appendChild(prev);
+        wrap.appendChild(next);
+
+        const getStep = () => {
+            const first = track.querySelector('.carousel-card, .product-card');
+            if (!first) return 200;
+            const style = getComputedStyle(track);
+            const gap = parseFloat(style.columnGap || style.gap || '20') || 20;
+            return first.getBoundingClientRect().width + gap;
+        };
+
+        prev.addEventListener('click', () => track.scrollBy({ left: -getStep(), behavior: 'smooth' }));
+        next.addEventListener('click', () => track.scrollBy({ left: getStep(), behavior: 'smooth' }));
+
+        const updateArrows = () => {
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            if (maxScroll <= 4) {
+                prev.setAttribute('disabled', '');
+                next.setAttribute('disabled', '');
+                return;
+            }
+            if (track.scrollLeft <= 2) prev.setAttribute('disabled', '');
+            else prev.removeAttribute('disabled');
+            if (track.scrollLeft >= maxScroll - 2) next.setAttribute('disabled', '');
+            else next.removeAttribute('disabled');
+        };
+
+        track.addEventListener('scroll', updateArrows, { passive: true });
+        window.addEventListener('resize', updateArrows);
+        setTimeout(updateArrows, 100);
+    });
+}
+
+// ===== SCROLL REVEAL ANIMATIONS =====
+function initScrollReveals() {
+    // 1. Split page titles into character spans for char-by-char reveal
+    document.querySelectorAll('.page-title').forEach(title => {
+        const text = title.textContent;
+        title.innerHTML = '';
+        const frag = document.createDocumentFragment();
+        [...text].forEach((ch, i) => {
+            const span = document.createElement('span');
+            span.className = 'char';
+            span.textContent = ch === ' ' ? '\u00A0' : ch;
+            span.style.transitionDelay = (i * 0.035) + 's';
+            frag.appendChild(span);
+        });
+        title.appendChild(frag);
+    });
+
+    // 2. Tag cards/content blocks for fade-up reveal
+    const revealTargets = document.querySelectorAll(
+        '.spot-card, .carousel-card, .product-card, .pulse-card, ' +
+        '.snap-item, .form-container, .event-layout, ' +
+        '.urban-relics-layout, #tirana-map'
+    );
+    revealTargets.forEach((el, i) => {
+        el.classList.add('reveal-up');
+        // stagger siblings in the same parent
+        const siblings = el.parentElement ? [...el.parentElement.children].filter(c => c === el || c.classList.contains('reveal-up')) : [el];
+        const idx = siblings.indexOf(el);
+        el.style.setProperty('--reveal-delay', (Math.min(idx, 6) * 0.08) + 's');
+    });
+
+    // 3. IntersectionObserver — trigger animations when elements enter viewport
+    if (!('IntersectionObserver' in window)) {
+        // Fallback: show everything immediately
+        document.querySelectorAll('.page-title').forEach(t => t.classList.add('revealed'));
+        document.querySelectorAll('.reveal-up').forEach(t => t.classList.add('visible'));
+        return;
+    }
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains('page-title')) {
+                    entry.target.classList.add('revealed');
+                } else {
+                    entry.target.classList.add('visible');
+                }
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.page-title, .reveal-up').forEach(el => revealObserver.observe(el));
+}
 
 // ===== SNAPS: ADD PHOTO =====
 function addSnap(input) {
