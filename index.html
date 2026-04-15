@@ -307,7 +307,7 @@
                         <div class="fits-main" id="fits-main">
                             <div class="carousel-track">
                                 <div class="carousel-card" onclick="openFitsCategory('tshirts')"><div class="carousel-img placeholder-img"></div><span class="carousel-label">T-SHIRTS</span></div>
-                                <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">TOTES</span></div>
+                                <div class="carousel-card" onclick="openFitsCategory('totes')"><div class="carousel-img placeholder-img"></div><span class="carousel-label">TOTES</span></div>
                                 <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">SOCKS</span></div>
                                 <div class="carousel-card" onclick="selectCarouselCard(this)"><div class="carousel-img placeholder-img"></div><span class="carousel-label">HATS</span></div>
                             </div>
@@ -341,6 +341,34 @@
                             </div>
                         </div>
 
+                        <!-- Totes product carousel -->
+                        <div class="fits-products" id="fits-totes" style="display:none;">
+                            <button class="btn-back" onclick="closeFitsCategory('totes')">&larr; BACK</button>
+                            <h3 class="products-title">TOTES</h3>
+                            <div class="carousel-track">
+                                <div class="product-card" onclick="openProduct('tote-1')">
+                                    <div class="product-img" style="background-image:url('assets/tote-tirona.jpg')"></div>
+                                    <span class="product-name">TIRONA</span>
+                                    <span class="product-price">€18</span>
+                                </div>
+                                <div class="product-card" onclick="openProduct('tote-2')">
+                                    <div class="product-img" style="background-image:url('assets/tote-konit-houses.jpg')"></div>
+                                    <span class="product-name">KÒNIT HOUSES</span>
+                                    <span class="product-price">€20</span>
+                                </div>
+                                <div class="product-card" onclick="openProduct('tote-3')">
+                                    <div class="product-img" style="background-image:url('assets/tote-girlpower.jpg')"></div>
+                                    <span class="product-name">GIRL POWER</span>
+                                    <span class="product-price">€22</span>
+                                </div>
+                                <div class="product-card" onclick="openProduct('tote-4')">
+                                    <div class="product-img" style="background-image:url('assets/tote-edhepak.jpg')"></div>
+                                    <span class="product-name">EDHE PAK...</span>
+                                    <span class="product-price">€20</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Product detail / buy view -->
                         <div class="product-detail" id="product-detail" style="display:none;">
                             <button class="btn-back" onclick="closeProduct()">&larr; BACK</button>
@@ -353,7 +381,7 @@
                                     <div class="product-detail-price" id="product-detail-price">€25</div>
                                     <p class="product-detail-desc" id="product-detail-desc">Premium cotton tee with a screen-printed Tirana design. Soft, breathable, and made for the city.</p>
 
-                                    <div class="option-group">
+                                    <div class="option-group" id="size-group">
                                         <label class="option-label">SIZE</label>
                                         <div class="size-options">
                                             <button type="button" class="size-btn" onclick="selectSize(this)">S</button>

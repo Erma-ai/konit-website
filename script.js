@@ -83,11 +83,17 @@ function closeFitsCategory(category) {
 
 // ===== SHOP: PRODUCT DETAIL =====
 const PRODUCTS = {
-    'tshirt-1': { name: 'TIRONA',         price: 35, img: 'assets/tshirt-tirona.jpg',  desc: 'Premium white sweatshirt with the Tirona \u2014 hart\u00EB eksperjencash graphic. Soft cotton blend, cozy fit, made for every season in the city.' },
-    'tshirt-2': { name: 'KONIT LOGO',     price: 28, img: 'assets/tshirt-konit.jpg',   desc: 'Oversized KONIT logo tee in black on white. Heavyweight cotton, screen-printed in Tirana. A bold statement piece.' },
-    'tshirt-3': { name: "HAJDE N'SOF\u00CBR", price: 30, img: 'assets/tshirt-hajde.jpg',   desc: 'Back-print tee celebrating the Albanian table. Relaxed oversized fit, 100% cotton, hand-illustrated design.' },
-    'tshirt-4': { name: 'EDHE PAK...',    price: 30, img: 'assets/tshirt-edhepak.jpg', desc: 'Albanian coffee culture tee. Oversized fit, cream cotton, green back-print design. For the ones who always stay for one more.' }
+    'tshirt-1': { name: 'TIRONA',              price: 35, img: 'assets/tshirt-tirona.jpg',    category: 'tshirts', desc: 'Premium white sweatshirt with the Tirona \u2014 hart\u00EB eksperjencash graphic. Soft cotton blend, cozy fit, made for every season in the city.' },
+    'tshirt-2': { name: 'KONIT LOGO',          price: 28, img: 'assets/tshirt-konit.jpg',     category: 'tshirts', desc: 'Oversized KONIT logo tee in black on white. Heavyweight cotton, screen-printed in Tirana. A bold statement piece.' },
+    'tshirt-3': { name: "HAJDE N'SOF\u00CBR",  price: 30, img: 'assets/tshirt-hajde.jpg',     category: 'tshirts', desc: 'Back-print tee celebrating the Albanian table. Relaxed oversized fit, 100% cotton, hand-illustrated design.' },
+    'tshirt-4': { name: 'EDHE PAK...',         price: 30, img: 'assets/tshirt-edhepak.jpg',   category: 'tshirts', desc: 'Albanian coffee culture tee. Oversized fit, cream cotton, green back-print design. For the ones who always stay for one more.' },
+    'tote-1':   { name: 'TIRONA',              price: 18, img: 'assets/tote-tirona.jpg',      category: 'totes',   desc: 'Canvas tote bag with the blue Tirona cityscape print \u2014 "Tirone lind, nuk bohesh". Sturdy cotton, long handles, everyday essential.' },
+    'tote-2':   { name: 'K\u00D2NIT HOUSES',   price: 20, img: 'assets/tote-konit-houses.jpg', category: 'totes',   desc: 'Colorful houses pattern tote with the K\u00D2NIT wordmark. Heavyweight canvas, screen-printed design.' },
+    'tote-3':   { name: 'GIRL POWER',          price: 22, img: 'assets/tote-girlpower.jpg',   category: 'totes',   desc: 'Statement tote \u2014 K\u00D2NIT Girl Power, Llafe pa fund. Bright yellow handles, cartoon illustration print. Loud and proud.' },
+    'tote-4':   { name: 'EDHE PAK...',         price: 20, img: 'assets/tote-edhepak.jpg',     category: 'totes',   desc: 'Cream canvas tote with the Edhe pak... coffee illustration. Perfect companion for caf\u00E9 mornings.' }
 };
+
+let lastProductCategory = 'tshirts';
 
 let currentProduct = null;
 let currentQty = 1;
@@ -99,6 +105,7 @@ function openProduct(productId) {
     currentProduct = productId;
     currentQty = 1;
     currentSize = null;
+    lastProductCategory = p.category || 'tshirts';
 
     document.getElementById('product-detail-name').textContent = p.name;
     document.getElementById('product-detail-price').textContent = '\u20AC' + p.price;
@@ -109,13 +116,17 @@ function openProduct(productId) {
     imgEl.classList.remove('placeholder-img');
     document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
 
+    const sizeGroup = document.getElementById('size-group');
+    if (sizeGroup) sizeGroup.style.display = (lastProductCategory === 'tshirts') ? 'flex' : 'none';
+
     document.getElementById('fits-tshirts').style.display = 'none';
+    document.getElementById('fits-totes').style.display = 'none';
     document.getElementById('product-detail').style.display = 'block';
 }
 
 function closeProduct() {
     document.getElementById('product-detail').style.display = 'none';
-    document.getElementById('fits-tshirts').style.display = 'block';
+    document.getElementById('fits-' + lastProductCategory).style.display = 'block';
 }
 
 function selectSize(btn) {
@@ -130,22 +141,26 @@ function changeQty(delta) {
 }
 
 function addToCart() {
-    if (!currentSize) {
+    const p = PRODUCTS[currentProduct];
+    const needsSize = (lastProductCategory === 'tshirts');
+    if (needsSize && !currentSize) {
         showModal('Pick a size', 'Please choose a size before adding to cart.');
         return;
     }
-    const p = PRODUCTS[currentProduct];
-    showModal('Added to cart', p.name + ' (size ' + currentSize + ', qty ' + currentQty + ') has been added to your cart.');
+    const sizeTxt = needsSize ? 'size ' + currentSize + ', ' : '';
+    showModal('Added to cart', p.name + ' (' + sizeTxt + 'qty ' + currentQty + ') has been added to your cart.');
 }
 
 function buyNow() {
-    if (!currentSize) {
+    const p = PRODUCTS[currentProduct];
+    const needsSize = (lastProductCategory === 'tshirts');
+    if (needsSize && !currentSize) {
         showModal('Pick a size', 'Please choose a size before checking out.');
         return;
     }
-    const p = PRODUCTS[currentProduct];
     const total = (p.price * currentQty).toFixed(2);
-    showModal('Order placed!', p.name + ' x' + currentQty + ' (size ' + currentSize + ')\nTotal: \u20AC' + total + '\nCheck your email for confirmation.');
+    const sizeTxt = needsSize ? ' (size ' + currentSize + ')' : '';
+    showModal('Order placed!', p.name + ' x' + currentQty + sizeTxt + '\nTotal: \u20AC' + total + '\nCheck your email for confirmation.');
 }
 
 // ===== PULSE EVENT VIEWS =====
