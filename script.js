@@ -407,7 +407,7 @@ function addSnap(input) {
 // ===== FORM HANDLERS =====
 function handleDropSpot(e) {
     e.preventDefault();
-    showModal('Faleminderit!', 'Your spot has been submitted! The community will review it.');
+    showModal('Thank you!', 'Your spot has been submitted! The community will review it.');
     e.target.reset();
 }
 
