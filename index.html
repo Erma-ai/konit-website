@@ -57,94 +57,17 @@
             <!-- HOT SPOTS -->
             <div id="hot-spots-tab" class="tab-content active">
                 <div class="card-row four-col" id="hotspots-grid">
-                    <div class="spot-card" onclick="openCarousel('bars')">
-                        <div class="spot-image bars-card-img">
-                            <svg viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg" class="bars-svg">
-                                <rect width="200" height="340" fill="#d6d2c4"/>
-                                <style>
-                                    .wl{font-family:'Inter',sans-serif;font-size:18px;fill:#9a9689;font-weight:600}
-                                    .bl{font-family:'Anton',sans-serif;font-size:22px;fill:#1a1a1a;font-weight:900}
-                                </style>
-                                <text class="wl" x="28" y="30">w</text><text class="wl" x="72" y="30">g</text><text class="wl" x="116" y="30">d</text><text class="wl" x="160" y="30">f</text>
-                                <text class="wl" x="28" y="55">h</text><text class="wl" x="72" y="55">i</text><text class="wl" x="116" y="55">y</text><text class="wl" x="160" y="55">j</text>
-                                <text class="wl" x="28" y="80">c</text><text class="wl" x="72" y="80">u</text><text class="wl" x="116" y="80">n</text><text class="wl" x="160" y="80">o</text>
-                                <text class="wl" x="28" y="105">o</text><text class="wl" x="72" y="105">x</text><text class="wl" x="116" y="105">n</text><text class="wl" x="160" y="105">e</text>
-                                <text class="wl" x="28" y="130">f</text><text class="wl" x="72" y="130">u</text><text class="wl" x="116" y="130">n</text><text class="wl" x="160" y="130">h</text>
-                                <text class="wl" x="28" y="155">f</text><text class="wl" x="72" y="155">b</text><text class="wl" x="116" y="155">f</text><text class="wl" x="160" y="155">r</text>
-                                <text class="wl" x="28" y="180">e</text><text class="wl" x="72" y="180">n</text><text class="wl" x="116" y="180">d</text><text class="wl" x="160" y="180">t</text>
-                                <!-- BARS circled -->
-                                <ellipse cx="116" cy="230" rx="18" ry="70" fill="none" stroke="#E8524A" stroke-width="3.5" transform="rotate(-2 116 230)"/>
-                                <text class="wl" x="28" y="205">k</text><text class="wl" x="72" y="205">q</text><text class="bl" x="108" y="208">B</text><text class="wl" x="160" y="205">o</text>
-                                <text class="wl" x="28" y="230">n</text><text class="wl" x="72" y="230">p</text><text class="bl" x="108" y="233">A</text><text class="wl" x="160" y="230">y</text>
-                                <text class="wl" x="28" y="255">b</text><text class="wl" x="72" y="255">v</text><text class="bl" x="108" y="258">R</text><text class="wl" x="160" y="255">x</text>
-                                <text class="wl" x="28" y="280">b</text><text class="wl" x="72" y="280">r</text><text class="bl" x="108" y="283">S</text><text class="wl" x="160" y="280">h</text>
-                                <text class="wl" x="28" y="305">g</text><text class="wl" x="72" y="305">e</text><text class="wl" x="116" y="305">a</text><text class="wl" x="160" y="305">g</text>
-                                <text class="wl" x="28" y="330">h</text><text class="wl" x="72" y="330">y</text><text class="wl" x="116" y="330">e</text><text class="wl" x="160" y="330">v</text>
-                            </svg>
-                        </div>
+                    <div class="spot-card" onclick="openCarousel('bars')" aria-label="BARS">
+                        <div class="spot-image" style="background-image:url('assets/hotspot-bars.svg'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#e0dbc1;"></div>
                     </div>
-                    <div class="spot-card" onclick="openCarousel('galleries')">
-                        <div class="spot-image bars-card-img">
-                            <svg viewBox="0 0 200 380" xmlns="http://www.w3.org/2000/svg" class="bars-svg">
-                                <rect width="200" height="380" fill="#d6d2c4"/>
-                                <style>
-                                    .gl{font-family:'Inter',sans-serif;font-size:18px;fill:#9a9689;font-weight:600}
-                                    .gbl{font-family:'Anton',sans-serif;font-size:22px;fill:#1a1a1a;font-weight:900}
-                                </style>
-                                <text class="gl" x="28" y="28">w</text><text class="gl" x="72" y="28">g</text><text class="gl" x="116" y="28">d</text><text class="gl" x="160" y="28">f</text>
-                                <text class="gl" x="28" y="52">h</text><text class="gl" x="72" y="52">i</text><text class="gl" x="116" y="52">y</text><text class="gl" x="160" y="52">j</text>
-                                <text class="gl" x="28" y="76">c</text><text class="gl" x="72" y="76">u</text><text class="gl" x="116" y="76">n</text><text class="gl" x="160" y="76">o</text>
-                                <!-- G row + ART horizontal -->
-                                <text class="gl" x="28" y="100">o</text><text class="gbl" x="64" y="103">G</text><text class="gl" x="116" y="100">n</text><text class="gl" x="160" y="100">e</text>
-                                <!-- ART horizontal crossing at A -->
-                                <text class="gl" x="28" y="124">f</text><text class="gbl" x="64" y="127">A</text><text class="gbl" x="108" y="127">R</text><text class="gbl" x="150" y="127">T</text>
-                                <!-- Horizontal ellipse for ART -->
-                                <ellipse cx="112" cy="122" rx="58" ry="16" fill="none" stroke="#E8524A" stroke-width="3" transform="rotate(-3 112 122)"/>
-                                <!-- Vertical ellipse for GALLERIES -->
-                                <ellipse cx="72" cy="220" rx="18" ry="130" fill="none" stroke="#E8524A" stroke-width="3" transform="rotate(-1 72 220)"/>
-                                <text class="gl" x="28" y="148">f</text><text class="gbl" x="64" y="151">L</text><text class="gl" x="116" y="148">f</text><text class="gl" x="160" y="148">r</text>
-                                <text class="gl" x="28" y="172">e</text><text class="gbl" x="64" y="175">L</text><text class="gl" x="116" y="172">d</text><text class="gl" x="160" y="172">t</text>
-                                <text class="gl" x="28" y="196">k</text><text class="gbl" x="64" y="199">E</text><text class="gl" x="116" y="196">b</text><text class="gl" x="160" y="196">o</text>
-                                <text class="gl" x="28" y="220">n</text><text class="gbl" x="64" y="223">R</text><text class="gl" x="116" y="220">a</text><text class="gl" x="160" y="220">y</text>
-                                <text class="gl" x="28" y="244">b</text><text class="gbl" x="64" y="247">I</text><text class="gl" x="116" y="244">k</text><text class="gl" x="160" y="244">x</text>
-                                <text class="gl" x="28" y="268">b</text><text class="gbl" x="64" y="271">E</text><text class="gl" x="116" y="268">s</text><text class="gl" x="160" y="268">h</text>
-                                <text class="gl" x="28" y="292">g</text><text class="gbl" x="64" y="295">S</text><text class="gl" x="116" y="292">a</text><text class="gl" x="160" y="292">g</text>
-                                <text class="gl" x="28" y="316">h</text><text class="gl" x="72" y="316">y</text><text class="gl" x="116" y="316">e</text><text class="gl" x="160" y="316">v</text>
-                                <text class="gl" x="28" y="340">g</text><text class="gl" x="72" y="340">c</text><text class="gl" x="116" y="340">g</text><text class="gl" x="160" y="340">h</text>
-                            </svg>
-                        </div>
+                    <div class="spot-card" onclick="openCarousel('galleries')" aria-label="ART GALLERIES">
+                        <div class="spot-image" style="background-image:url('assets/hotspot-galleries.svg'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#e0dbc1;"></div>
                     </div>
-                    <div class="spot-card" onclick="openCarousel('cultural')">
-                        <div class="spot-image bars-card-img">
-                            <svg viewBox="0 0 200 380" xmlns="http://www.w3.org/2000/svg" class="bars-svg">
-                                <rect width="200" height="380" fill="#d6d2c4"/>
-                                <style>
-                                    .cl{font-family:'Inter',sans-serif;font-size:18px;fill:#9a9689;font-weight:600}
-                                    .cbl{font-family:'Anton',sans-serif;font-size:22px;fill:#1a1a1a;font-weight:900}
-                                </style>
-                                <!-- Vertical ellipse for CULTURAL -->
-                                <ellipse cx="30" cy="130" rx="20" ry="110" fill="none" stroke="#E8524A" stroke-width="3" transform="rotate(-2 30 130)"/>
-                                <!-- Vertical ellipse for SPACE -->
-                                <ellipse cx="72" cy="270" rx="20" ry="72" fill="none" stroke="#E8524A" stroke-width="3" transform="rotate(2 72 270)"/>
-                                <text class="cbl" x="20" y="28">C</text><text class="cl" x="72" y="28">g</text><text class="cl" x="116" y="28">d</text><text class="cl" x="160" y="28">f</text>
-                                <text class="cbl" x="20" y="55">U</text><text class="cl" x="72" y="55">i</text><text class="cl" x="116" y="55">y</text><text class="cl" x="160" y="55">j</text>
-                                <text class="cbl" x="20" y="82">L</text><text class="cl" x="72" y="82">u</text><text class="cl" x="116" y="82">n</text><text class="cl" x="160" y="82">o</text>
-                                <text class="cbl" x="20" y="109">T</text><text class="cl" x="72" y="109">x</text><text class="cl" x="116" y="109">n</text><text class="cl" x="160" y="109">e</text>
-                                <text class="cbl" x="20" y="136">U</text><text class="cl" x="72" y="136">u</text><text class="cl" x="116" y="136">n</text><text class="cl" x="160" y="136">h</text>
-                                <text class="cbl" x="20" y="163">R</text><text class="cl" x="72" y="163">b</text><text class="cl" x="116" y="163">f</text><text class="cl" x="160" y="163">r</text>
-                                <text class="cbl" x="20" y="190">A</text><text class="cl" x="72" y="190">n</text><text class="cl" x="116" y="190">d</text><text class="cl" x="160" y="190">t</text>
-                                <text class="cbl" x="20" y="217">L</text><text class="cbl" x="64" y="217">S</text><text class="cl" x="116" y="217">t</text><text class="cl" x="160" y="217">o</text>
-                                <text class="cl" x="28" y="244">n</text><text class="cbl" x="64" y="244">P</text><text class="cl" x="116" y="244">u</text><text class="cl" x="160" y="244">y</text>
-                                <text class="cl" x="28" y="271">b</text><text class="cbl" x="64" y="271">A</text><text class="cl" x="116" y="271">k</text><text class="cl" x="160" y="271">x</text>
-                                <text class="cl" x="28" y="298">b</text><text class="cbl" x="64" y="298">C</text><text class="cl" x="116" y="298">j</text><text class="cl" x="160" y="298">h</text>
-                                <text class="cl" x="28" y="325">g</text><text class="cbl" x="64" y="325">E</text><text class="cl" x="116" y="325">a</text><text class="cl" x="160" y="325">g</text>
-                                <text class="cl" x="28" y="352">h</text><text class="cl" x="72" y="352">y</text><text class="cl" x="116" y="352">e</text><text class="cl" x="160" y="352">v</text>
-                                <text class="cl" x="28" y="375">v</text><text class="cl" x="72" y="375">n</text><text class="cl" x="116" y="375">g</text><text class="cl" x="160" y="375">a</text>
-                            </svg>
-                        </div>
+                    <div class="spot-card" onclick="openCarousel('cultural')" aria-label="CULTURAL SPACES">
+                        <div class="spot-image" style="background-image:url('assets/hotspot-cultural.svg'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#e0dbc1;"></div>
                     </div>
-                    <div class="spot-card" onclick="openCarousel('clubs')">
-                        <div class="spot-image placeholder-img"></div>
+                    <div class="spot-card" onclick="openCarousel('clubs')" aria-label="FESTIVALS">
+                        <div class="spot-image" style="background-image:url('assets/hotspot-festivals.svg'); background-size:contain; background-repeat:no-repeat; background-position:center; background-color:#e0dbc1;"></div>
                     </div>
                 </div>
 
