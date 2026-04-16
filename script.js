@@ -269,7 +269,7 @@ function initMapPins() {
 
 document.addEventListener('DOMContentLoaded', () => {
     initScrollReveals();
-    initCarouselArrows();
+    initCarouselSliders();
     initSplashCursor();
     initMapPins();
 });
@@ -388,57 +388,91 @@ function initSplashCursor() {
     requestAnimationFrame(frame);
 }
 
-// ===== CAROUSEL SCROLL ARROWS =====
-function initCarouselArrows() {
+// ===== CAROUSEL SLIDERS (one-card-at-a-time, autoplay, pagination dots) =====
+function initCarouselSliders() {
+    const AUTOPLAY_MS = 3500;
+
     document.querySelectorAll('.carousel-track').forEach(track => {
-        // Wrap track in a positioning container
+        const cards = track.querySelectorAll('.carousel-card, .product-card');
+        if (cards.length <= 1) return; // single-card tracks don't need a slider
+
+        // Wrap track in a positioning container that clips overflow.
         const wrap = document.createElement('div');
-        wrap.className = 'carousel-wrap';
+        wrap.className = 'carousel-wrap is-slider';
         track.parentNode.insertBefore(wrap, track);
         wrap.appendChild(track);
 
-        const prev = document.createElement('button');
-        prev.className = 'carousel-arrow prev';
-        prev.type = 'button';
-        prev.setAttribute('aria-label', 'Scroll left');
-        prev.innerHTML = '&lsaquo;';
+        // Build pagination dots (one per card) right after the wrap.
+        const dotsBar = document.createElement('div');
+        dotsBar.className = 'carousel-dots';
+        cards.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot';
+            dot.type = 'button';
+            dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => { goTo(i); restartAutoplay(); });
+            dotsBar.appendChild(dot);
+        });
+        wrap.parentNode.insertBefore(dotsBar, wrap.nextSibling);
 
-        const next = document.createElement('button');
-        next.className = 'carousel-arrow next';
-        next.type = 'button';
-        next.setAttribute('aria-label', 'Scroll right');
-        next.innerHTML = '&rsaquo;';
+        let current = 0;
+        let timer = null;
+        let inView = false;
 
-        wrap.appendChild(prev);
-        wrap.appendChild(next);
+        function goTo(i) {
+            current = (i + cards.length) % cards.length;
+            track.style.transform = 'translateX(-' + (current * 100) + '%)';
+            dotsBar.querySelectorAll('.carousel-dot').forEach((d, j) => {
+                d.classList.toggle('active', j === current);
+            });
+        }
+        function nextSlide() { goTo(current + 1); }
+        function startAutoplay() {
+            stopAutoplay();
+            if (!inView) return;
+            timer = setInterval(nextSlide, AUTOPLAY_MS);
+        }
+        function stopAutoplay() {
+            if (timer) { clearInterval(timer); timer = null; }
+        }
+        function restartAutoplay() { stopAutoplay(); startAutoplay(); }
 
-        const getStep = () => {
-            const first = track.querySelector('.carousel-card, .product-card');
-            if (!first) return 200;
-            const style = getComputedStyle(track);
-            const gap = parseFloat(style.columnGap || style.gap || '20') || 20;
-            return first.getBoundingClientRect().width + gap;
-        };
+        // Pause autoplay on hover/focus, resume on leave/blur.
+        wrap.addEventListener('mouseenter', stopAutoplay);
+        wrap.addEventListener('mouseleave', startAutoplay);
+        wrap.addEventListener('focusin',   stopAutoplay);
+        wrap.addEventListener('focusout',  startAutoplay);
 
-        prev.addEventListener('click', () => track.scrollBy({ left: -getStep(), behavior: 'smooth' }));
-        next.addEventListener('click', () => track.scrollBy({ left: getStep(), behavior: 'smooth' }));
-
-        const updateArrows = () => {
-            const maxScroll = track.scrollWidth - track.clientWidth;
-            if (maxScroll <= 4) {
-                prev.setAttribute('disabled', '');
-                next.setAttribute('disabled', '');
-                return;
+        // Touch swipe support.
+        let touchX = null;
+        wrap.addEventListener('touchstart', (e) => {
+            touchX = e.touches[0].clientX;
+            stopAutoplay();
+        }, { passive: true });
+        wrap.addEventListener('touchend', (e) => {
+            if (touchX === null) return;
+            const dx = (e.changedTouches[0].clientX) - touchX;
+            if (Math.abs(dx) > 40) {
+                if (dx < 0) goTo(current + 1);
+                else goTo(current - 1);
             }
-            if (track.scrollLeft <= 2) prev.setAttribute('disabled', '');
-            else prev.removeAttribute('disabled');
-            if (track.scrollLeft >= maxScroll - 2) next.setAttribute('disabled', '');
-            else next.removeAttribute('disabled');
-        };
+            touchX = null;
+            restartAutoplay();
+        }, { passive: true });
 
-        track.addEventListener('scroll', updateArrows, { passive: true });
-        window.addEventListener('resize', updateArrows);
-        setTimeout(updateArrows, 100);
+        // Only autoplay when the carousel is actually on screen.
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    inView = entry.isIntersecting;
+                    if (inView) startAutoplay(); else stopAutoplay();
+                });
+            }, { threshold: 0.35 }).observe(wrap);
+        } else {
+            inView = true;
+            startAutoplay();
+        }
     });
 }
 

@@ -584,6 +584,73 @@ body {
     .carousel-arrow { display: none; }
 }
 
+/* ===== CARD SLIDER MODE (one-card-at-a-time, autoplay, pagination dots) ===== */
+.carousel-wrap.is-slider {
+    overflow: hidden;
+    position: relative;
+}
+.is-slider .carousel-track {
+    overflow: visible;
+    scroll-snap-type: none;
+    padding: 0;
+    gap: 0;
+    transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform;
+}
+.is-slider .carousel-card,
+.is-slider .product-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+    scroll-snap-align: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.is-slider .carousel-img,
+.is-slider .product-img {
+    max-width: 320px;
+    width: 100%;
+}
+.is-slider .carousel-card:hover {
+    transform: none;
+}
+.is-slider + .carousel-dots,
+.carousel-wrap.is-slider + .carousel-dots {
+    display: flex;
+}
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 0;
+}
+.carousel-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--beige, #e0dbc1);
+    opacity: 0.5;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+.carousel-dot:hover {
+    opacity: 0.85;
+}
+.carousel-dot.active {
+    background: var(--gold, #c9a24a);
+    opacity: 1;
+    transform: scale(1.35);
+}
+.carousel-dot:focus-visible {
+    outline: 2px solid var(--gold, #c9a24a);
+    outline-offset: 3px;
+}
+
 .carousel-track::-webkit-scrollbar {
     height: 5px;
 }
