@@ -588,8 +588,11 @@ body {
 .carousel-wrap.is-slider {
     overflow: hidden;
     position: relative;
+    width: 100%;
 }
 .is-slider .carousel-track {
+    display: flex;
+    width: 100%;
     overflow: visible;
     scroll-snap-type: none;
     padding: 0;
@@ -600,12 +603,15 @@ body {
 .is-slider .carousel-card,
 .is-slider .product-card {
     flex: 0 0 100%;
+    min-width: 100%;
     max-width: 100%;
+    width: 100%;
     scroll-snap-align: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    box-sizing: border-box;
 }
 .is-slider .carousel-img,
 .is-slider .product-img {
