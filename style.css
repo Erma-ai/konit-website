@@ -370,25 +370,32 @@ body {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== URBAN RELICS LAYOUT ===== */
+/* ===== URBAN RELICS LAYOUT =====
+   Tab buttons (FITS / URBAN GEAR / CREATIVE TOOLS) sit in a horizontal row
+   directly below the "URBAN RELICS" page title so the carousel gets the
+   full content width instead of being squeezed next to a left sidebar. */
 .urban-relics-layout {
     display: flex;
-    gap: 40px;
+    flex-direction: column;
+    gap: 28px;
     width: 100%;
-    align-items: flex-start;
+    align-items: stretch;
 }
 
 .urban-relics-sidebar {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
     flex-shrink: 0;
-    width: 200px;
+    width: 100%;
 }
 
 .tab-btn-side {
-    padding: 14px 0;
-    width: 200px;
+    padding: 14px 28px;
+    width: auto;
+    min-width: 160px;
     border-radius: 25px;
     font-family: var(--font-body);
     font-weight: 700;
@@ -615,14 +622,29 @@ body {
 }
 .is-slider .carousel-img,
 .is-slider .product-img {
-    max-width: 200px;
+    max-width: 340px;
     width: 100%;
+}
+@media (max-width: 900px) {
+    .is-slider .carousel-img,
+    .is-slider .product-img {
+        max-width: 280px;
+    }
 }
 @media (max-width: 640px) {
     .is-slider .carousel-img,
     .is-slider .product-img {
-        max-width: 170px;
+        max-width: 230px;
     }
+}
+.is-slider .carousel-label,
+.is-slider .product-name {
+    font-size: 15px;
+    margin-top: 14px;
+}
+.is-slider .product-price {
+    font-size: 15px;
+    margin-top: 4px;
 }
 .is-slider .carousel-card:hover {
     transform: none;
@@ -1364,9 +1386,8 @@ body {
     .navbar    { padding: 0 24px; }
     .section   { padding: 60px 24px; min-height: auto; }
     .section-hero { min-height: calc(100vh - var(--navbar-height)); }
-    .urban-relics-layout { gap: 24px; }
-    .urban-relics-sidebar { width: 170px; }
-    .tab-btn-side { width: 170px; }
+    .urban-relics-layout { gap: 22px; }
+    .tab-btn-side { min-width: 150px; padding: 13px 22px; }
     .event-left { flex: 0 0 260px; }
     .event-layout { gap: 32px; }
     .carousel-card { flex: 0 0 170px; }
